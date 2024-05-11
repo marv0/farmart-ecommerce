@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Import necessary module
+
 from flask import Flask, render_template, request, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user

@@ -5,9 +5,6 @@ from flask_login import UserMixin
 
 from config import db
 
-# Initialize SQLAlchemy instance
-db = SQLAlchemy()
-
 # Define User model
 class User(db.Model, UserMixin):
     __tablename__ = 'users'

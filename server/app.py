@@ -2,23 +2,11 @@ from flask import Flask, request, jsonify, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
-# Local imports
-from config import app, db
+from flask import request, jsonify, flash, redirect, url_for
+from config import app, db  # Import Flask app and SQLAlchemy instance from config
 
 # Add your model imports
-from models import User, Farmer, Animal, Order
-
-# Initialize Flask app
-app = Flask(__name__)
-
-# Configure Flask app
-app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a random secret key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost/database_name'  # Update with your database URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize SQLAlchemy instance
-db.init_app(app)
+from models import User, Farmer, Animal, Order, db
 
 # Initialize LoginManager
 login_manager = LoginManager()

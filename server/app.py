@@ -4,6 +4,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request, jsonify, flash, redirect, url_for
 from config import app, db  # Import Flask app and SQLAlchemy instance from config
+from sqlalchemy import or_
 
 # Add your model imports
 from models import User, Farmer, Animal, Order, db
@@ -63,11 +64,49 @@ def logout():
     logout_user()
     return jsonify({'message': 'You have been logged out.'}), 200
 
-# Define route for listing animals
-@app.route('/animals')
+# # Define route for listing animals
+# @app.route('/animals')
+# def list_animals():
+#     animals = Animal.query.all()
+#     animal_data = [{'id': animal.id, 'type': animal.type, 'breed': animal.breed, 'age': animal.age, 'price': animal.price, 'description': animal.description} for animal in animals]
+#     return jsonify(animal_data)
+
+# Define route for listing animals with search and filter options
+@app.route('/animals', methods=['GET'])
 def list_animals():
-    animals = Animal.query.all()
-    animal_data = [{'id': animal.id, 'type': animal.type, 'breed': animal.breed, 'age': animal.age, 'price': animal.price, 'description': animal.description} for animal in animals]
+    # Get query parameters
+    animal_type = request.args.get('type')
+    breed = request.args.get('breed')
+    min_age = request.args.get('min_age')
+    max_age = request.args.get('max_age')
+    search_query = request.args.get('q')
+
+    # Query animals based on filters
+    query = Animal.query
+
+    if animal_type:
+        query = query.filter(Animal.type == animal_type)
+
+    if breed:
+        query = query.filter(Animal.breed == breed)
+
+    if min_age:
+        query = query.filter(Animal.age >= int(min_age))
+
+    if max_age:
+        query = query.filter(Animal.age <= int(max_age))
+
+    # Search animals based on search query
+    if search_query:
+        query = query.filter(or_(Animal.type.ilike(f'%{search_query}%'), Animal.breed.ilike(f'%{search_query}%')))
+
+    animals = query.all()
+
+    # Serialize animals data
+    animal_data = [{'id': animal.id, 'type': animal.type, 'breed': animal.breed,
+                    'age': animal.age, 'price': animal.price, 'description': animal.description}
+                   for animal in animals]
+
     return jsonify(animal_data)
 
 # Define route for adding a new animal (for farmers)

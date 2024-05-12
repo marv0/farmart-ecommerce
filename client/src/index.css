@@ -1,3 +1,7 @@
+/* src/styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 :root {
   --bg: #282c34;
   --header: #fff;

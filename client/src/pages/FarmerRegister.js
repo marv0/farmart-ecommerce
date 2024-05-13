@@ -57,10 +57,11 @@ export default function FarmerRegister() {
                     style={{maxWidth: '1000px'}}
                 >
                     <div className="md:flex w-full">
-                        <div className="hidden md:block w-1/2 bg-indigo-500 py-10 px-10">
+                        <div className="hidden md:block w-1/2 bg-indigo-500">
                             <img 
                                 src={iconPhoto}
-                                alt=''
+                                alt='Farmer Registration'
+                                className="object-cover w-full h-full"
                             />
                         </div>
                         <div className="w-full md:w-1/2 py-10 px-5 md:px-10">

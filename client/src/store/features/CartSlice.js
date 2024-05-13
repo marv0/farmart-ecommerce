@@ -54,7 +54,7 @@ export const totalCartItemsSelector = createSelector([cartItems], (cartItems)=>
 );
 
 export const totalPriceSelector = createSelector([cartItems], (cartItems)=>
-    cartItems.reduce((total,curr)=>(total+= curr.qty * curr.product.price), 0)
+    cartItems.reduce((total,curr)=>(total+= curr.qty * curr.animal.price), 0)
 )
 
 export const productQtyInCartSelector = createSelector([cartItems, (cartItems,animalId)=>animalId],

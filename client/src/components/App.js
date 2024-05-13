@@ -12,6 +12,7 @@ import FarmerRegister from "../pages/FarmerRegister";
 import PageNotFound from "../pages/PageNotFound";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Dashboard from "../pages/Dashboard";
 
 const AppLayout = () => {
   return(
@@ -40,6 +41,7 @@ function App() {
           <Route path='/about-us' element={<About />} />
           <Route path='/contact-us' element={<Contact />} />
           <Route path='*' element={<PageNotFound />} />
+          <Route path='/user-dashboard' element={<Dashboard />} />
         </Route>
       </Routes>
     </Router>

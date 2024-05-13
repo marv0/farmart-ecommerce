@@ -56,51 +56,41 @@ export default function Footer() {
                 <h4 
                     className="text-white text-lg font-semibold mb-7"
                 >
-                    Products
+                    Quick Links
                 </h4>
                 <ul className="list-none space-y-4">
                     <li>
                         <a 
-                            href="/#" 
+                            href="/" 
                             className="hover:text-white text-gray-300 text-sm"
                         >
-                            Sale
+                            Home
                         </a>
                     </li>
                     <li>
                         <a 
-                            href="/#" 
+                            href="/store" 
                             className="hover:text-white text-gray-300 text-sm"
                         >
-                            New arrivals
+                            Our Store
                         </a>
                     </li>
                     <li>
                         <a 
-                            href="/#" 
+                            href="/about-us" 
                             className="hover:text-white text-gray-300 text-sm"
                         >
-                            Shop
+                            About Us
                         </a>
                     </li>
                     <li>
                         <a 
-                            href="/#" 
+                            href="/contact-us" 
                             className="hover:text-white text-gray-300 text-sm"
                         >
-                            Store
+                            Contact Us
                         </a>
                     </li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 className="text-white text-lg font-semibold mb-7">Resources</h4>
-                <ul className="list-none space-y-4">
-                <li><a href="/#" className="hover:text-white text-gray-300 text-sm">Documentation</a></li>
-                <li><a href="/#" className="hover:text-white text-gray-300 text-sm">Tutorials</a></li>
-                <li><a href="/#" className="hover:text-white text-gray-300 text-sm">Blog</a></li>
-                <li><a href="/#" className="hover:text-white text-gray-300 text-sm">FAQ</a></li>
                 </ul>
             </div>
 

@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import Logo from '../../assets/logo.webp'
 import { BsCartDash } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
-import { CiHeart } from "react-icons/ci";
+// import { CiHeart } from "react-icons/ci"; 
 import { FaAngleDown } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { totalCartItemsSelector } from '../../store/features/CartSlice';
 
 export default function Navbar() {
@@ -91,13 +91,13 @@ export default function Navbar() {
                     </li>
 
                     <li className='group max-lg:border-b max-lg:py-3 relative'>
-                        <a href='/#'
+                        <button href='/#'
                             className='hover:text-[#007bff] text-gray-600 text-[15px] font-bold 
                             lg:hover:fill-[#007bff] block'
                         >
                             Pages
                             <FaAngleDown className="ml-1 inline-block" width="16px" height="16px" />
-                        </a>
+                        </button>
                         <ul
                             className='absolute shadow-lg bg-white space-y-3 lg:top-5 max-lg:top-8 
                             -left-6 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 
@@ -124,11 +124,38 @@ export default function Navbar() {
                             </li>
                             <li className='border-b py-2 '>
                                 <a 
-                                    href='/#'
+                                    href='/user-dashboard'
+                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                    font-bold block'
+                                >
+                                    Your Dashboard
+                                </a>
+                            </li>
+                            <li className='border-b py-2 '>
+                                <a 
+                                    href='/auth/login'
                                     className='hover:text-[#007bff] text-gray-600 text-[15px] 
                                     font-bold block'
                                 >
                                     Login
+                                </a>
+                            </li>
+                            <li className='border-b py-2 '>
+                                <a 
+                                    href='/auth/user-register'
+                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                    font-bold block'
+                                >
+                                    Register as Customer
+                                </a>
+                            </li>
+                            <li className='border-b py-2 '>
+                                <a 
+                                    href='/auth/farmer-register'
+                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                    font-bold block'
+                                >
+                                    Register as Farmer
                                 </a>
                             </li>
                         </ul>

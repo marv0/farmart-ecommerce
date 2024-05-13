@@ -1,73 +1,73 @@
 import React from 'react'
 import AnimalCard from './AnimalCard'
 
-const animals = [
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-    {
-        id: 1,
-        name: 'Breeding Cow'
-    },
-]
-export default function AnimalsList() {
+// const animals = [
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+//     {
+//         id: 1,
+//         name: 'Breeding Cow'
+//     },
+// ]
+export default function AnimalsList({animals}) {
   return (
     <div>
         <section className="bg-white py-12 text-gray-700 sm:py-4 lg:py-4">

@@ -1,8 +1,9 @@
 import React from 'react'
 import Hero from '../components/homepage/Hero'
 import Features from '../components/homepage/Features'
-import Categories from '../components/homepage/Categories'
+// import Categories from '../components/homepage/Categories'
 import NewArrivals from '../components/homepage/NewArrivals'
+import { animals } from '../utils/animals'
 
 export default function Home() {
   return (
@@ -13,12 +14,14 @@ export default function Home() {
       <div>
         <Features />
       </div>
-      <div>
+      {/* <div>
         <Categories />
-      </div>
-      <div>
-        <NewArrivals />
-      </div>
+      </div> */}
+      {animals&&
+        <div>
+          <NewArrivals animals={animals} />
+        </div>
+      }
     </div>
   )
 }

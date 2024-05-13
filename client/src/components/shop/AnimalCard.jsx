@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, productQtyInCartSelector } from '../../store/features/CartSlice'
-import cowPhoto from '../../assets/friesian.jpg'
 
 export default function AnimalCard({animal}) {
     const qty = useSelector(state=>productQtyInCartSelector(state, animal.id))
@@ -39,7 +38,7 @@ export default function AnimalCard({animal}) {
                 <img 
                     className="h-full w-full object-cover transition-all duration-300 
                     group-hover:scale-125" 
-                    src={cowPhoto} 
+                    src={animal.photo} 
                     alt="" 
                 />
             </a>
@@ -52,7 +51,7 @@ export default function AnimalCard({animal}) {
                 <h3 
                     // className="mb-2 text-sm text-gray-400"
                 >
-                    Fresh Apples
+                    {animal.type}
                 </h3>
             </a>
         </div>
@@ -61,7 +60,9 @@ export default function AnimalCard({animal}) {
                 className="text-xl font-bold text-gray-900 dark:text-white"
             >
                 <span>Ksh.</span>
-                <span className='ps-1'>690</span>
+                <span className='ps-1'>
+                    {animal.price}
+                </span>
             </span>
             <AddToCart />
         </div>

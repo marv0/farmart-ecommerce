@@ -104,7 +104,7 @@ def list_animals():
 
     # Serialize animals data
     animal_data = [{'id': animal.id, 'type': animal.type, 'breed': animal.breed,
-                    'age': animal.age, 'price': animal.price, 'description': animal.description}
+                    'age': animal.age, 'price': animal.price, 'description': animal.description, 'quantity': animal.quantity}
                    for animal in animals]
 
     return jsonify(animal_data)
@@ -122,8 +122,9 @@ def add_animal():
     age = data.get('age')
     price = data.get('price')
     description = data.get('description')
+    quantity = data.get('quantity')
 
-    new_animal = Animal(farmer_id=current_user.id, type=type, breed=breed, age=age, price=price, description=description)
+    new_animal = Animal(farmer_id=current_user.id, type=type, breed=breed, age=age, price=price, description=description, quantity=quantity)
     db.session.add(new_animal)
     db.session.commit()
 
@@ -143,6 +144,7 @@ def update_animal(animal_id):
     animal.age = data.get('age')
     animal.price = data.get('price')
     animal.description = data.get('description')
+    animal.quantity = data.get('quantity')
 
     db.session.commit()
     return jsonify({'message': 'Animal updated successfully.'}), 200

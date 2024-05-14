@@ -1,4 +1,4 @@
-# Creating test data and corresponding endpoints.
+# Creating and testing data and corresponding endpoints.
 
 1. **User Registration**
 2. **User Login**

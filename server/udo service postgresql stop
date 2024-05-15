@@ -1,0 +1,289 @@
+Mei 09 13:07:38 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 6220.[0m
+Mei 09 13:07:38 victor-HP-EliteBook-840-G3 systemd[1]: Finished PostgreSQL RDBMS.
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has finished successfully[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished successfully.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 6220.[0m
+Mei 09 20:47:51 victor-HP-EliteBook-840-G3 systemd[1]: postgresql.service: Deactivated successfully.
+[0;38;5;245m░░ [0m[0;32mSubject: Unit succeeded[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has successfully entered the 'dead' state.[0m
+Mei 09 20:47:51 victor-HP-EliteBook-840-G3 systemd[1]: Stopped PostgreSQL RDBMS.
+[0;38;5;245m░░ [0m[0;32mSubject: A stop job for unit postgresql.service has finished[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA stop job for unit postgresql.service has finished.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 7696 and the job result is done.[0m
+[0;1;39m-- Boot af2129c51d154a0cb5b6132615b9e64f --[0m
+Mei 09 20:48:46 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 128.[0m
+Mei 09 20:48:46 victor-HP-EliteBook-840-G3 systemd[1]: Finished PostgreSQL RDBMS.
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has finished successfully[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished successfully.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 128.[0m
+Mei 13 09:41:27 victor-HP-EliteBook-840-G3 systemd[1]: postgresql.service: Deactivated successfully.
+[0;38;5;245m░░ [0m[0;32mSubject: Unit succeeded[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has successfully entered the 'dead' state.[0m
+Mei 13 09:41:27 victor-HP-EliteBook-840-G3 systemd[1]: Stopped PostgreSQL RDBMS.
+[0;38;5;245m░░ [0m[0;32mSubject: A stop job for unit postgresql.service has finished[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA stop job for unit postgresql.service has finished.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 18268 and the job result is done.[0m
+Mei 13 09:41:27 victor-HP-EliteBook-840-G3 systemd[1]: Stopping PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A stop job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA stop job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 18268.[0m
+Mei 13 09:41:30 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 18268.[0m
+Mei 13 09:41:30 victor-HP-EliteBook-840-G3 pg_ctlcluster[75572]: Error: specified cluster '13 main' does not exist
+Mei 13 09:41:30 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=1/FAILURE[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 1.[0m
+Mei 13 09:41:30 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 13 09:41:30 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 18268 and the job result is failed.[0m
+Mei 13 09:58:51 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 18561.[0m
+Mei 13 09:58:51 victor-HP-EliteBook-840-G3 pg_ctlcluster[76232]: Cluster is already running.
+Mei 13 09:58:51 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=2/INVALIDARGUMENT[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 2.[0m
+Mei 13 09:58:51 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 13 09:58:51 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 18561 and the job result is failed.[0m
+[0;1;39m-- Boot 9e6ffc6c0e1043f0848ec43701adc472 --[0m
+Mei 14 08:57:29 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 172.[0m
+Mei 14 08:57:29 victor-HP-EliteBook-840-G3 pg_ctlcluster[1135]: Cluster is already running.
+Mei 14 08:57:29 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=2/INVALIDARGUMENT[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 2.[0m
+Mei 14 08:57:29 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 14 08:57:29 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 172 and the job result is failed.[0m
+[0;1;39m-- Boot ba2de78bdd504ea9aa6a134e327b01fd --[0m
+Mei 15 12:47:02 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 177.[0m
+Mei 15 12:47:02 victor-HP-EliteBook-840-G3 pg_ctlcluster[1138]: Cluster is already running.
+Mei 15 12:47:02 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=2/INVALIDARGUMENT[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 2.[0m
+Mei 15 12:47:02 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 15 12:47:02 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 177 and the job result is failed.[0m
+[0;1;39m-- Boot 2f8c27969add416891b749c5de066e30 --[0m
+Mei 15 13:17:18 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 128.[0m
+Mei 15 13:17:18 victor-HP-EliteBook-840-G3 pg_ctlcluster[1197]: Cluster is already running.
+Mei 15 13:17:18 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=2/INVALIDARGUMENT[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 2.[0m
+Mei 15 13:17:18 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 15 13:17:18 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 128 and the job result is failed.[0m
+Mei 15 16:22:02 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 4077.[0m
+Mei 15 16:22:02 victor-HP-EliteBook-840-G3 pg_ctlcluster[12287]: Cluster is already running.
+Mei 15 16:22:02 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=2/INVALIDARGUMENT[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 2.[0m
+Mei 15 16:22:02 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 15 16:22:02 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 4077 and the job result is failed.[0m
+Mei 15 16:24:54 victor-HP-EliteBook-840-G3 systemd[1]: Starting PostgreSQL RDBMS...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 4153.[0m
+Mei 15 16:24:54 victor-HP-EliteBook-840-G3 pg_ctlcluster[12458]: Cluster is already running.
+Mei 15 16:24:54 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;39m[0;1;31m[0;1;39mpostgresql.service: Main process exited, code=exited, status=2/INVALIDARGUMENT[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit process exited[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mAn ExecStart= process belonging to unit postgresql.service has exited.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe process' exit code is 'exited' and its exit status is 2.[0m
+Mei 15 16:24:54 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mpostgresql.service: Failed with result 'exit-code'.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: Unit failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit postgresql.service has entered the 'failed' state with result 'exit-code'.[0m
+Mei 15 16:24:54 victor-HP-EliteBook-840-G3 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start PostgreSQL RDBMS.[0m
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit postgresql.service has failed[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit postgresql.service has finished with a failure.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 4153 and the job result is failed.[0m

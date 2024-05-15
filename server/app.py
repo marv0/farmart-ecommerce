@@ -15,7 +15,9 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    user_type = db.Column(db.String(20), nullable=False)
+    USER_TYPE_USER = 'user'
+    USER_TYPE_FARMER = 'farmer'
+    user_type = db.Column(db.String(20), nullable=False, default=USER_TYPE_USER)
 
 # Initialize LoginManager
 login_manager = LoginManager()
@@ -37,6 +39,9 @@ def register():
 
     if not username or not email or not password or not user_type:
         return jsonify({'message': 'Missing parameters'}), 400
+
+    if user_type not in [User.USER_TYPE_USER, User.USER_TYPE_FARMER]:
+        return jsonify({'message': 'Invalid user type'}), 400
 
     # Check if the username or email already exists
     if User.query.filter_by(username=username).first() is not None:
@@ -63,13 +68,13 @@ def login():
     if not username or not password or not user_type:
         return jsonify({'message': 'Missing username, password, or user type'}), 400
 
-    user = User.query.filter_by(username=username, user_type=user_type).first()
+    user = User.query.filter_by(username=username).first()
 
-    if user and check_password_hash(user.password, password):
-        login_user(user)
-        return jsonify({'message': 'Login successful'}), 200
-    else:
+    if not user or not check_password_hash(user.password, password) or user.user_type != user_type:
         return jsonify({'message': 'Invalid username, password, or user type'}), 401
+
+    login_user(user)
+    return jsonify({'message': 'Login successful'}), 200
 
 @app.route('/logout')
 @login_required

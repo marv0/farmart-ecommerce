@@ -13,6 +13,11 @@ import PageNotFound from "../pages/PageNotFound";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Dashboard from "../pages/Dashboard";
+import DashboardLayout from "../pages/DashboardLayout";
+import FarmerAnimalsList from "../pages/FarmerAnimalsList";
+import FarmerEditAnimal from "../pages/FarmerEditAnimal";
+import FarmerPostAnimal from "../pages/FarmerPostAnimal";
+import DashboardOrders from "../pages/DashboardOrders";
 
 const AppLayout = () => {
   return(
@@ -41,7 +46,14 @@ function App() {
           <Route path='/about-us' element={<About />} />
           <Route path='/contact-us' element={<Contact />} />
           <Route path='*' element={<PageNotFound />} />
+        </Route>
+
+        <Route path="/" element={<DashboardLayout />}>
           <Route path='/user-dashboard' element={<Dashboard />} />
+          <Route path='/user-dashboard/orders' element={<DashboardOrders />} />
+          <Route path='/farmer/animals' element={<FarmerAnimalsList />} />
+          <Route path='/farmer/animal/:animalId/edit' element={<FarmerEditAnimal />} />
+          <Route path='/farmer/post-animal' element={<FarmerPostAnimal />} />
         </Route>
       </Routes>
     </Router>

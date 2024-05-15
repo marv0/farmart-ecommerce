@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import AnimalsList from '../components/shop/AnimalsList'
 import FilterForm from '../components/shop/FilterForm'
 import { animals } from '../utils/animals'
+import { toast } from 'react-toastify';
 
 export default function Shop() {
   const [animalsList, setAnimalsList] = useState(null)
@@ -12,6 +13,22 @@ export default function Shop() {
     setAnimalsList(animals)
     setLoading(false)
   }, [])
+
+  // useEffect(() => {
+  //   const fetchAllAnimals = async () => {
+  //     try {
+  //       setLoading(true)
+  //       const response = await fetch('http://127.0.0.1:5555/animals');
+  //       const data = await response.json();
+  //       setAnimalsList(data)
+  //       setLoading(false)
+  //     } catch (error) {
+  //       toast.error('An unexpected error occured. Please try again later')
+  //       setLoading(false)
+  //     }
+  //   }
+  //   fetchAllAnimals()
+  // }, [])
 
   function LoadingState(){
     return(

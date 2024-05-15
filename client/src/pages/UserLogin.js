@@ -1,18 +1,24 @@
 import React, {useState} from 'react'
+import { toast } from 'react-toastify';
+import { FaSpinner } from "react-icons/fa";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function UserLogin() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
     const backgroundImage = 'https://as1.ftcdn.net/v2/jpg/02/65/94/38/1000_F_265943881_4yQ6bNgbUjtEvtjq3bDLPa42KmT0LItG.jpg'
 
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = async(event) => {
         event.preventDefault(); 
 
         if (!username) {
-            console.log('Username is required')
+            toast.error('Username is required')
             return
         } else if(!password) {
-            console.log('Password cannot be empty')
+            toast.error('Password cannot be empty')
             return
         } else {
             const formData = {
@@ -23,6 +29,26 @@ export default function UserLogin() {
             const jsonData = JSON.stringify(formData);
 
             console.log("Submitted json Data:", jsonData)
+            try {
+                setLoading(true)
+                const response = await fetch(`http://127.0.0.1:5555/login`, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: jsonData
+                });
+
+                const responseData = await response.json();
+                // const searchParams = new URLSearchParams(location.search);
+                // const redirectTo = searchParams.get('redirect') || '/dashboard';
+                // navigate(redirectTo);
+                console.log(responseData)
+                setLoading(false)
+            } catch (error) {
+                toast.error('An error occured')
+                setLoading(false)
+            }
         }
     }
   return (
@@ -91,13 +117,24 @@ export default function UserLogin() {
                         />
                     </div>
                     <div className="mt-8">
-                        <button 
-                            type='submit'
-                            className="bg-green-700 text-white font-bold py-2 px-4 w-full 
-                            rounded hover:bg-green-600"
-                        >
-                            Login
-                        </button>
+                        {loading ? (
+                            <button 
+                                type='button'
+                                className="bg-green-700 text-white font-bold py-2 px-4 w-full 
+                                rounded hover:bg-green-600 flex items-center justify-center cursor-not-allowed"
+                            >
+                                <FaSpinner className='me-2 w-5 h-5 font-bold animate-spin'/>
+                                Please Wait...
+                            </button>
+                        ) : (
+                            <button 
+                                type='submit'
+                                className="bg-green-700 text-white font-bold py-2 px-4 w-full 
+                                rounded hover:bg-green-600"
+                            >
+                                Login
+                            </button>
+                        )}
                     </div>
                     <div className="mt-4 flex items-center justify-between">
                         <p className="mb-3 text-base font-normal text-gray-700 dark:text-gray-400">

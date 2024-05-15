@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify';
 // import friesianCow from '../assets/friesian.jpg'
 import { animals } from '../utils/animals'
 import { increment, decrement, productQtyInCartSelector } from '../store/features/CartSlice'
@@ -36,6 +37,7 @@ export default function AnimalDetails() {
     const animalId = parseInt(useParams().animalId);
     const [animal, setAnimal] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [wantedAnimal, setWantedAnimal] = useState(null)
 
     useEffect(() => {
         setLoading(true);
@@ -43,6 +45,28 @@ export default function AnimalDetails() {
         setAnimal(wantedAnimal)
         setLoading(false);
     }, [animalId]);
+
+    // useEffect(() => {
+    //     const fetchAnimal = async () => {
+    //       try {
+    //         setLoading(true)
+    //         const response = await fetch(`http://127.0.0.1:5555/${animalId}`);
+    //         if (!response.ok) {
+    //           throw new Error('Network response was not ok');
+    //         }
+    //         const data = await response.json();
+    //         setWantedAnimal(data);
+    //         setLoading(false);
+    //       } catch (error) {
+    //         toast.error('An unexpected error occurred');
+    //         console.error('Error fetching animal:', error);
+    //       } finally {
+    //         setLoading(false);
+    //       }
+    //     };
+    
+    //     fetchAnimal();
+    //   }, [animalId]);
 
     if(loading){
         return(

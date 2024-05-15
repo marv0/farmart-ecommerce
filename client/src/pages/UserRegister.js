@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
 import iconPhoto from '../assets/friesian.jpg'
+import { FaSpinner } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 export default function UserRegister() {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('') 
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [loading, setLoading] = useState(false)
     const user_type = 'consumer'
 
-    const handleUserRegistrationSubmit = (event) => {
+    const handleUserRegistrationSubmit = async(event) => {
         event.preventDefault(); 
         
         if (!username) {
@@ -36,6 +39,19 @@ export default function UserRegister() {
 
             const jsonData = JSON.stringify(formData);
             console.log("Submitted json Data:", jsonData)
+            try {
+                const response = await fetch(`http://127.0.0.1:5555/login`, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: jsonData
+                });
+
+                const responseData = await response.json();
+            } catch (error) {
+                toast.error('An unexpected error occured. Please try again later')
+            }
         }
 
         // Reset form fields if needed
@@ -215,14 +231,26 @@ export default function UserRegister() {
                                 </div>
                                 <div className="flex -mx-3">
                                     <div className="w-full px-3 mb-5">
-                                        <button 
-                                            type='submit'
-                                            className="block w-full max-w-xs mx-auto bg-indigo-500 
-                                            hover:bg-indigo-700 focus:bg-indigo-700 text-white 
-                                            rounded-lg px-3 py-3 font-semibold"
-                                        >
-                                            Submit
-                                        </button>
+                                        {loading ? (
+                                            <button 
+                                                type='button'
+                                                className="w-full max-w-xs mx-auto bg-green-500 text-white 
+                                                rounded-lg px-3 py-3 font-semibold 
+                                                flex items-center justify-center cursor-not-allowed"
+                                            >
+                                                <FaSpinner className='me-2 w-5 h-5 font-bold animate-spin' />
+                                                Please Wait...
+                                            </button>
+                                        ) : (
+                                            <button 
+                                                type='submit'
+                                                className="block w-full max-w-xs mx-auto bg-green-500 
+                                                hover:bg-green-700 text-white 
+                                                rounded-lg px-3 py-3 font-semibold"
+                                            >
+                                                Submit
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </form>

@@ -17,11 +17,11 @@ export default function Home() {
       {/* <div>
         <Categories />
       </div> */}
-      {animals&&
+      {/* {animals&&
         <div>
           <NewArrivals animals={animals} />
         </div>
-      }
+      } */}
     </div>
   )
 }

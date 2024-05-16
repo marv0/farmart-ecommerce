@@ -8,8 +8,7 @@ export default function FarmerAnimalsList() {
   const navigate = useNavigate()
   const [currentFarmerAnimals, setCurrentFarmerAnimals] = useState([])
   const [loading, setLoading] = useState(false)
-  const user = {id: 1, user_type:'farmer'}
-  // const user = null
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if(user && user.user_type === 'farmer'){
@@ -32,7 +31,7 @@ export default function FarmerAnimalsList() {
       toast.error('You have no permission to view this page')
       navigate('/')
     }
-  }, [])
+  }, [navigate, user])
 
   return (
     <div>

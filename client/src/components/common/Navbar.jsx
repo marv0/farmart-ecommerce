@@ -7,10 +7,21 @@ import { FaAngleDown } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useSelector } from 'react-redux'
 import { totalCartItemsSelector } from '../../store/features/CartSlice';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const navigate = useNavigate()
     const [navOpen, setNavOpen] = useState(false)
     const totalItems = useSelector(totalCartItemsSelector)
+
+    const logout = () =>{
+        localStorage.removeItem("user")
+        toast.success('Logout succesful')
+        navigate('/auth/login')
+    }
+
   return (
     <header className='flex border-b bg-white font-sans min-h-[70px] tracking-wide relative z-50'>
         <div className='flex flex-wrap items-center justify-between px-10 py-3 gap-4 w-full'>
@@ -95,7 +106,7 @@ export default function Navbar() {
                             className='hover:text-[#007bff] text-gray-600 text-[15px] font-bold 
                             lg:hover:fill-[#007bff] block'
                         >
-                            Pages
+                            Account
                             <FaAngleDown className="ml-1 inline-block" width="16px" height="16px" />
                         </button>
                         <ul
@@ -104,60 +115,59 @@ export default function Navbar() {
                             group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 
                             transition-all duration-500'
                         >
-                            <li className='border-b py-2 '>
-                                <a 
-                                    href='/about-us'
-                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
-                                    font-bold block'
-                                >
-                                    About Us
-                                </a>
-                            </li>
-                            <li className='border-b py-2 '>
-                                <a 
-                                    href='/contact-us'
-                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
-                                    font-bold block'
-                                >
-                                    Contact
-                                </a>
-                            </li>
-                            <li className='border-b py-2 '>
-                                <a 
-                                    href='/user-dashboard'
-                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
-                                    font-bold block'
-                                >
-                                    Your Dashboard
-                                </a>
-                            </li>
-                            <li className='border-b py-2 '>
-                                <a 
-                                    href='/auth/login'
-                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
-                                    font-bold block'
-                                >
-                                    Login
-                                </a>
-                            </li>
-                            <li className='border-b py-2 '>
-                                <a 
-                                    href='/auth/user-register'
-                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
-                                    font-bold block'
-                                >
-                                    Register as Customer
-                                </a>
-                            </li>
-                            <li className='border-b py-2 '>
-                                <a 
-                                    href='/auth/farmer-register'
-                                    className='hover:text-[#007bff] text-gray-600 text-[15px] 
-                                    font-bold block'
-                                >
-                                    Register as Farmer
-                                </a>
-                            </li>
+                            {user && (
+                                <>
+                                    <li className='border-b py-2 '>
+                                        <a 
+                                            href='/user-dashboard'
+                                            className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                            font-bold block'
+                                        >
+                                            Your Dashboard
+                                        </a>
+                                    </li>
+                                    <li className='border-b py-2 '>
+                                        <button
+                                            onClick={() => logout()}
+                                            className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                            font-bold block'
+                                        >
+                                            Sign Out
+                                        </button>
+                                    </li>   
+                                </>                    
+                            )}
+                            {!user && (
+                                <>
+                                    <li className='border-b py-2 '>
+                                        <a 
+                                            href='/auth/login'
+                                            className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                            font-bold block'
+                                        >
+                                            Login
+                                        </a>
+                                    </li>
+                                    <li className='border-b py-2 '>
+                                        <a 
+                                            href='/auth/user-register'
+                                            className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                            font-bold block'
+                                        >
+                                            Register as Customer
+                                        </a>
+                                    </li>
+                                    <li className='border-b py-2 '>
+                                        <a 
+                                            href='/auth/farmer-register'
+                                            className='hover:text-[#007bff] text-gray-600 text-[15px] 
+                                            font-bold block'
+                                        >
+                                            Register as Farmer
+                                        </a>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </li>
                 </ul>

@@ -72,7 +72,7 @@ export default function AnimalsList({animals}) {
     <div>
         <section className="bg-white py-12 text-gray-700 sm:py-4 lg:py-4">
             <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-                <div className="mt-2 grid grid-cols-2 gap-6 lg:grid-cols-4 sm:gap-4 lg:mt-2">
+                <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-5">
                     {animals?.map((animal, index) => {
                         return(
                             <AnimalCard 

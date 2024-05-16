@@ -1,8 +1,7 @@
 import React from 'react'
 
 export default function DashboardSidebar({sidebarOpen, setSidebarOpen}) {
-    const user = {id: 1, user_type:'consumer'}
-    // const user = null
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
         <aside 
             id="logo-sidebar" 

@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import iconPhoto from '../assets/friesian.jpg'
 import { FaSpinner } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserRegister() {
+    const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('') 
@@ -15,19 +17,19 @@ export default function UserRegister() {
         event.preventDefault(); 
         
         if (!username) {
-            console.log('Username cannot be empty')
+            toast.error('Username cannot be empty')
             return
         }else if (!email) {
-            console.log('Email cannot be empty')
+            toast.error('Email cannot be empty')
             return
         } else if(!password) {
-            console.log('Password required')
+            toast.error('Password required')
             return
         } else if(!confirmPassword){
-            console.log('Please confirm your password')
+            toast.error('Please confirm your password')
             return
         } else if(password !== confirmPassword){
-            console.log('Your passwords do not match')
+            toast.error('Your passwords do not match')
             return
         } else{
             const formData = {
@@ -40,7 +42,8 @@ export default function UserRegister() {
             const jsonData = JSON.stringify(formData);
             console.log("Submitted json Data:", jsonData)
             try {
-                const response = await fetch(`http://127.0.0.1:5555/login`, {
+                setLoading(true)
+                const response = await fetch(`http://127.0.0.1:5555/register`, {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json'
@@ -49,16 +52,26 @@ export default function UserRegister() {
                 });
 
                 const responseData = await response.json();
+                if(response.status === 201){
+                    toast.success('Your account has been succesfully created')
+                    setLoading(false)
+                    navigate('/auth/login')
+                }else{
+                    toast.error(responseData.error)
+                    console.log('Registration has failed', responseData)
+                    setLoading(false)
+                }
             } catch (error) {
                 toast.error('An unexpected error occured. Please try again later')
+                setLoading(false)
             }
         }
 
         // Reset form fields if needed
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        // setUsername('');
+        // setEmail('');
+        // setPassword('');
+        // setConfirmPassword('');
     };
   return (
     <div>

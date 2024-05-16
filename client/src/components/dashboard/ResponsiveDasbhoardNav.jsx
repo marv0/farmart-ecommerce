@@ -2,8 +2,7 @@ import React from 'react'
 import logo from '../../assets/logo.webp'
 
 export default function ResponsiveDasbhoardNav({sidebarOpen, setSidebarOpen}) {
-    const user = {id: 1, user_type:'farmer'}
-    // const user = null
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
         <aside 
             id="logo-sidebar" 

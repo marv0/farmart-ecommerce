@@ -1,6 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function AnimalDetailsModal({animalData, animalDetailsModalOpen, setAnimalDetailsModalOpen}) {
+  const navigate = useNavigate();
+
+  const routeToEditAnimal = (animal) => {
+    setAnimalDetailsModalOpen(false)
+    navigate(`/farmer/animal/${animal.id}/edit`, {state:{animal}})
+  }
   return (
     <div className={`${animalDetailsModalOpen ? 'flex' : 'hidden'} fixed inset-0 z-50 items-center justify-center`}>
       {/* Overlay */}
@@ -45,16 +52,16 @@ export default function AnimalDetailsModal({animalData, animalDetailsModalOpen, 
                           The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
                       </p>
                   </div>
-                  <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                      <button 
+                  <div className="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                      <button
+                        onClick={() => routeToEditAnimal(animalData)} 
                         data-modal-hide="default-modal" 
                         type="button" 
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
                         focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm 
-                        px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 
-                        dark:focus:ring-blue-800"
+                        px-5 py-2.5 text-center"
                       >
-                        I accept
+                        Edit Animal
                       </button>
                       <button 
                         data-modal-hide="default-modal" 
@@ -67,7 +74,7 @@ export default function AnimalDetailsModal({animalData, animalDetailsModalOpen, 
                         dark:text-gray-400 dark:border-gray-600 dark:hover:text-white 
                         dark:hover:bg-gray-700"
                       >
-                        Decline
+                        Close
                       </button>
                   </div>
               </div>

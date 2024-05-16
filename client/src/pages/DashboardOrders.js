@@ -4,25 +4,16 @@ import OrdersList from '../components/dashboard/farmer/OrdersList'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const user = {
-  id: 1,
-  user_type: 'farmer'
-}
-// const user = {
-//   id: 1,
-//   user_type: 'customer'
-// }
 
-// const user = null
-// }
 export default function DashboardOrders() {
   const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     if(!user){
       toast.error('Access denied')
       navigate('/auth/login')
     }
-  }, [navigate])
+  }, [user, navigate])
   
   return (
     <div>

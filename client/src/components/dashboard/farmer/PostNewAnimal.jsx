@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import { animalTypes } from '../../../utils/animalTypes'
 import { animalBreeds } from '../../../utils/animalBreeds'
 
-export default function PostNewAnimal() {
+export default function PostNewAnimal({handleAnimalData}) {
     const [animalType, setAnimalType] = useState(animalTypes[0].name)
     const [animalBreed, setAnimalBreed] = useState(animalBreeds[0].name)
-    const [animalAge, setAnimalAge] = useState(0)
-    const [animalPrice, setAnimalPrice] = useState(0)
+    const [animalAge, setAnimalAge] = useState(1)
+    const [animalPrice, setAnimalPrice] = useState(1)
     const [animalDescription, setAnimalDescription] = useState('')
     const [animalQuantity, setAnimalQuantity] = useState(1)
     const [animalPhoto, setAnimalPhoto] = useState('')
@@ -26,6 +26,7 @@ export default function PostNewAnimal() {
 
         const jsonData = JSON.stringify(formData);
         console.log("Submitted json Data for animal posting are:", jsonData)
+        handleAnimalData(jsonData)
     }
   return (
     <div>
@@ -47,7 +48,7 @@ export default function PostNewAnimal() {
                     <section className='flex items-center gap-4 mb-5'>
                         <div className='w-1/2'>
                             <label 
-                                for="animalType" 
+                                htmlFor="animalType" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Animal Type
@@ -81,7 +82,7 @@ export default function PostNewAnimal() {
 
                         <div className='w-1/2'>
                             <label 
-                                for="animalBreed" 
+                                htmlFor="animalBreed" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Breed
@@ -117,7 +118,7 @@ export default function PostNewAnimal() {
                     <section className='flex items-center gap-4 mb-5'>
                         <div className='w-1/2'>
                             <label 
-                                for="animalAge" 
+                                htmlFor="animalAge" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Age
@@ -140,7 +141,7 @@ export default function PostNewAnimal() {
 
                         <div className='w-1/2'>
                             <label 
-                                for="animalPrice" 
+                                htmlFor="animalPrice" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Price (Ksh)
@@ -164,7 +165,7 @@ export default function PostNewAnimal() {
 
                     <div className="mb-5">
                         <label 
-                            for="animalDescription" 
+                            htmlFor="animalDescription" 
                             className="block mb-2 text-sm font-semibold text-gray-900"
                         >
                             Description
@@ -186,7 +187,7 @@ export default function PostNewAnimal() {
                     <section className='flex items-start gap-4 mb-5'>
                         <div className='w-1/2'>
                             <label 
-                                for="animalQuantity" 
+                                htmlFor="animalQuantity" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Quantity
@@ -209,7 +210,7 @@ export default function PostNewAnimal() {
 
                         <div className='w-1/2'>
                             <label 
-                                for="animalPhoto" 
+                                htmlFor="animalPhoto" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Animal Photo

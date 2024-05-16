@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react'
 import AnimalsList from '../components/shop/AnimalsList'
 import FilterForm from '../components/shop/FilterForm'
 import { animals } from '../utils/animals'
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 export default function Shop() {
-  const [animalsList, setAnimalsList] = useState(null)
+  const [animalsList, setAnimalsList] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -35,6 +35,16 @@ export default function Shop() {
       <div>
         <p>
           Please wait as we load animals...
+        </p>
+      </div>
+    )
+  }
+
+  if(animalsList.length === 0){
+    return(
+      <div>
+        <p>
+          No animals found
         </p>
       </div>
     )

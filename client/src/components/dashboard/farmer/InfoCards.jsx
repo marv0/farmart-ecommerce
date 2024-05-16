@@ -16,8 +16,8 @@ export default function InfoCards() {
                         </svg>
                     </div>
                     <div className="px-4 text-gray-700">
-                        <h3 className="text-sm tracking-wider">Total Users</h3>
-                        <p className="text-3xl">12,768</p>
+                        <h3 className="text-sm tracking-wider">Total Orders</h3>
+                        <p className="text-3xl">567</p>
                     </div>
                 </div>
                 <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -28,8 +28,8 @@ export default function InfoCards() {
                             </path>
                         </svg></div>
                     <div className="px-4 text-gray-700">
-                        <h3 className="text-sm tracking-wider">Total Orders</h3>
-                        <p className="text-3xl">39,265</p>
+                        <h3 className="text-sm tracking-wider">Pending Orders</h3>
+                        <p className="text-3xl">265</p>
                     </div>
                 </div>
                 <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -40,11 +40,11 @@ export default function InfoCards() {
                             </path>
                         </svg></div>
                     <div className="px-4 text-gray-700">
-                        <h3 className="text-sm tracking-wider">Total Items Available</h3>
-                        <p className="text-3xl">142,334</p>
+                        <h3 className="text-sm tracking-wider">Listed Animals</h3>
+                        <p className="text-3xl">34</p>
                     </div>
                 </div>
-                <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+                {/* <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
                     <div className="p-4 bg-red-400">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -57,7 +57,7 @@ export default function InfoCards() {
                         <h3 className="text-sm tracking-wider">New Orders</h3>
                         <p className="text-3xl">34.12%</p>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

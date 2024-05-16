@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { BsThreeDots } from "react-icons/bs";
 import order01 from '../../../assets/angusCow.jpg'
+import OrderDetailsModal from './OrderDetailsModal';
+import CancelOrderModal from './CancelOrderModal';
 const activeOrders = [
     {
         id: 1,
@@ -104,13 +106,29 @@ const activeOrders = [
     }
 ];
 export default function OrdersList() {
-    // const [isBoxVisible, setIsBoxVisible] = useState(false);
     const [clickedItemIndex, setClickedItemIndex] = useState(null);
+    const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
+    const [cancelOrderModalOpen, setCancelOrderModalOpen] = useState(false)
+    const [orderData, setOrderData] = useState(null)
+    const [orderToCancel, setOrderToCancel] = useState(null)
+    const user = {id: 1, user_type:'farmer'}
+    // const user = null
 
     const toggleBoxVisibility = (index) => {
         // setIsBoxVisible(!isBoxVisible);
         setClickedItemIndex(index === clickedItemIndex ? null : index);
     };
+
+    const orderDetails = (order) => {
+        setOrderData(order)
+        console.log('Animal Clicked')
+        setOrderDetailsModalOpen(true)
+    }
+
+    const cancelOrder = (order) => {
+        setOrderToCancel(order)
+        setCancelOrderModalOpen(true)
+    }
 
   return (
     <div>
@@ -119,7 +137,7 @@ export default function OrdersList() {
                 <thead className="whitespace-nowrap bg-gray-100 rounded">
                     <tr>
                         <th className="px-6 py-4 text-left text-sm font-semibold text-black">
-                            Products
+                            Animals
                         </th>
                         <th className="px-6 py-4 text-left text-sm font-semibold text-black">
                             Quantity
@@ -190,6 +208,7 @@ export default function OrdersList() {
                                             <ul className="py-1" role="none">
                                                 <li>
                                                     <button 
+                                                        onClick={() => orderDetails(activeOrder)}
                                                         className="block px-4 py-2 text-sm 
                                                         text-gray-700 hover:bg-gray-100 
                                                         dark:text-gray-300 dark:hover:bg-gray-600 
@@ -199,17 +218,20 @@ export default function OrdersList() {
                                                         Details
                                                     </button>
                                                 </li>
+                                                {user && user.user_type === 'farmer' && (
                                                 <li>
                                                     <button 
+                                                        onClick={() => cancelOrder(activeOrder)}
                                                         className="block px-4 py-2 text-sm 
                                                         text-gray-700 hover:bg-gray-100 
                                                         dark:text-gray-300 dark:hover:bg-gray-600 
                                                         dark:hover:text-white" 
                                                         role="menuitem"
                                                     >
-                                                        Cancel Order
+                                                        Cancel Ordery
                                                     </button>
                                                 </li>
+                                                )}
                                             </ul>
                                         </div>
                                     )}
@@ -219,40 +241,16 @@ export default function OrdersList() {
                     })}
                 </tbody>
             </table>
-            {/* <div className="md:flex mt-4 px-6">
-                <p className="text-sm text-gray-400 flex-1">
-                    Showing 1 to 5 of 100 entries
-                </p>
-                <div className="flex items-center max-md:mt-4">
-                    <p className="text-sm text-gray-400">
-                        Display
-                    </p>
-                    <select 
-                        className="text-sm text-gray-400 border border-gray-400 rounded h-7 
-                        mx-4 outline-none"
-                    >
-                        <option>5</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>50</option>
-                        <option>100</option>
-                    </select>
-                    <div className="border flex rounded divide-x-2">
-                        <button 
-                            type="button" 
-                            className="px-4 py-2 hover:bg-gray-200 text-sm"
-                        >
-                            Previous
-                        </button>
-                        <button 
-                            type="button" 
-                            className="px-4 py-2 hover:bg-gray-200 text-sm"
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-            </div> */}
+            <OrderDetailsModal 
+                orderData={orderData}
+                orderDetailsModalOpen={orderDetailsModalOpen}
+                setOrderDetailsModalOpen={setOrderDetailsModalOpen}
+            />
+            <CancelOrderModal 
+                cancelOrderModalOpen={cancelOrderModalOpen}
+                orderToCancel={orderToCancel}
+                setCancelOrderModalOpen={setCancelOrderModalOpen}
+            />
         </div>
     </div>
     )

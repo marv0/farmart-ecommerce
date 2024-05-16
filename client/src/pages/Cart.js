@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useSelector} from 'react-redux' 
 import { totalPriceSelector, totalCartItemsSelector } from '../store/features/CartSlice'
 import CartItemCard from '../components/cart/CartItemCard'
 import EmptyCart from '../components/cart/EmptyCart'
+import PhoneNumberModal from '../components/cart/PhoneNumberModal'
 
 export default function Cart() {
     const totalItems = useSelector(totalCartItemsSelector)
     const cartItems = useSelector((state)=> state.cart.cartItems);
     const totalPrice = useSelector(totalPriceSelector)
+    const [modalOpen, setModalOpen] = useState(false)
+
+    const handleFormNumberSubmitted = (mpesaNumber) => {
+        console.log(mpesaNumber)
+    }
 
     if(totalItems === 0){
         return(
@@ -71,12 +77,18 @@ export default function Cart() {
                 </ul>
                 <button 
                     type="button" 
+                    onClick={() => setModalOpen(true)}
                     className="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 
                     hover:bg-blue-700 text-white rounded"
                 >
                     Check Out
                 </button>
             </div>
+            <PhoneNumberModal
+                modalOpen={modalOpen} 
+                setModalOpen={setModalOpen}
+                handleFormNumberSubmitted={handleFormNumberSubmitted}
+            />
         </div>
     </div>
   )

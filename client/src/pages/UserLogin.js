@@ -1,16 +1,27 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { toast } from 'react-toastify';
 import { FaSpinner } from "react-icons/fa";
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const user_data = {
+    id: 1, 
+    user_type: 'farmer'
+}
 export default function UserLogin() {
     const navigate = useNavigate();
     const location = useLocation();
+    const user = JSON.parse(localStorage.getItem('user'));
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const backgroundImage = 'https://as1.ftcdn.net/v2/jpg/02/65/94/38/1000_F_265943881_4yQ6bNgbUjtEvtjq3bDLPa42KmT0LItG.jpg'
 
+    useEffect(() => {
+        if(user){
+            toast.info('You are already logged in')
+            navigate('/')
+        }
+    }, [user, navigate])
     const handleLoginSubmit = async(event) => {
         event.preventDefault(); 
 
@@ -40,10 +51,22 @@ export default function UserLogin() {
                 });
 
                 const responseData = await response.json();
+                if(response.status === 200){
+                    localStorage.setItem("user", JSON.stringify(user_data));
+                    localStorage.setItem("access_token", JSON.stringify(responseData.access_token));
+                    toast.success('Succesfully Logged in')
+                    setLoading(false)
+                    const searchParams = new URLSearchParams(location.search);
+                    const redirectTo = searchParams.get('redirect') || '/';
+                    navigate(redirectTo);
+                }else{
+                    toast.error(responseData.error)
+                    setLoading(false)
+                }
                 // const searchParams = new URLSearchParams(location.search);
                 // const redirectTo = searchParams.get('redirect') || '/dashboard';
                 // navigate(redirectTo);
-                console.log(responseData)
+                console.log(responseData.error)
                 setLoading(false)
             } catch (error) {
                 toast.error('An error occured')

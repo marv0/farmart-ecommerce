@@ -21,7 +21,7 @@ export default function AnimalCard({animal}) {
         return(
             <button 
                 onClick={() => dispatch(decrement(animal))}
-                className="text-white bg-green-600 hover:bg-green-700 
+                className="text-white bg-red-600 hover:bg-red-700 
                 font-medium rounded-lg text-sm px-5 py-2 text-center"
             >
                 Remove from cart
@@ -29,43 +29,51 @@ export default function AnimalCard({animal}) {
         )
     }
   return (
-    <div 
-        className="relative flex flex-col overflow-hidden rounded-lg 
-        border shadow"
-    >
-        <div className="aspect-square overflow-hidden">
+    <>
+    <div className="rounded overflow-hidden shadow-lg">
+        <div className="relative">
             <a href={`/animal/${animal.id}`}>
-                <img 
-                    className="h-full w-full object-cover transition-all duration-300 
-                    group-hover:scale-125" 
-                    src={animal.photo} 
-                    alt="" 
+                <img className="w-full h-40"
+                    src={animal.photo}
+                    alt="Sunset in the mountains" 
                 />
+                <div
+                    className="hover:bg-transparent transition duration-300 
+                    absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"
+                >
+                </div>
             </a>
-        </div>
-        <div className="my-4 mx-auto flex w-11/12 flex-col items-start justify-between">
-            <a 
-                href={`/animal/${animal.id}`}
-                className='text-xl font-bold tracking-tight text-gray-900'
-            >
-                <h3 
-                    // className="mb-2 text-sm text-gray-400"
+            <a href={`/animal/${animal.id}`}>
+                <div
+                    className="absolute bottom-0 left-0 bg-green-600 px-4 py-2 
+                    text-white text-sm hover:bg-green-700 
+                    transition duration-500 ease-in-out"
                 >
                     {animal.type}
-                </h3>
+                </div>
             </a>
         </div>
-        <div className="mb-2 flex w-11/12 mx-auto items-start justify-between">
-            <span 
-                className="text-xl font-bold text-gray-900 dark:text-white"
+        <div className="px-3 py-4">
+            <a 
+                href={`/animal/${animal.id}`}
+                className="font-semibold text-lg inline-block 
+                hover:text-green-600 transition duration-500 ease-in-out"
             >
-                <span>Ksh.</span>
-                <span className='ps-1'>
-                    {animal.price}
-                </span>
-            </span>
+                Breed: {animal.breed}
+            </a>
+            <p className="text-gray-500 text-sm">
+                {animal.description}
+            </p>
+        </div>
+        <div className='px-3 pb-2'>
+            <p 
+                className="pb-1 font-semibold text-lg inline-block"
+            >
+                Price: Ksh. {animal.price}
+            </p>
             <AddToCart />
         </div>
     </div>
+    </>
   )
 }

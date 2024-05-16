@@ -10,8 +10,7 @@ export default function DashboardLayout() {
   const navigate = useNavigate()
   const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const user = {id: 1, user_type:'farmer'}
-    // const user = null
+    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
       if(!user){

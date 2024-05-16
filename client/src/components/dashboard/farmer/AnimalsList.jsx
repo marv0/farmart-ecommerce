@@ -18,7 +18,7 @@ export default function AnimalsList({animals}) {
             </h1>
         </section>
         <section>
-            <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-5">
                 {animals?.map((animal, index) => {
                     return(
                         <div 
@@ -40,23 +40,25 @@ export default function AnimalsList({animals}) {
                                     >
                                     </div>
                                 </div>
-                                <a href="#!">
-                                    <div
-                                        className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 
-                                        text-white text-sm hover:bg-white hover:text-indigo-600 
+                                <div>
+                                    <button
+                                        onClick={() => animalDetails(animal)}
+                                        className="absolute bottom-0 left-0 bg-green-600 px-4 py-2 
+                                        text-white text-sm hover:bg-green-700 
                                         transition duration-500 ease-in-out"
                                     >
                                         {animal.type}
-                                    </div>
-                                </a>
+                                    </button>
+                                </div>
                             </div>
-                            <div className="px-6 py-4">
-                                <a href="/#"
+                            <div className="px-3 py-4">
+                                <button
+                                    onClick={() => animalDetails(animal)}
                                     className="font-semibold text-lg inline-block 
-                                    hover:text-indigo-600 transition duration-500 ease-in-out"
+                                    hover:text-green-600 transition duration-500 ease-in-out"
                                 >
                                     Breed: {animal.breed}
-                                </a>
+                                </button>
                                 <p className="text-gray-500 text-sm">
                                     {animal.description}
                                 </p>

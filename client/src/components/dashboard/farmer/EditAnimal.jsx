@@ -54,13 +54,13 @@ export default function EditAnimal({animal}) {
                     </div>
                     <form 
                         onSubmit={handleFormSubmit}
-                        className="w-8/12 mx-auto p-4 bg-white border 
+                        className="w-full lg:w-8/12 mx-auto p-4 bg-white border 
                         border-gray-200 rounded-lg shadow"
                     >
                         <section className='flex items-center gap-4 mb-5'>
-                            <div className='w-1/2'>
+                            <div className='sm:w-full md:w-1/2'>
                                 <label 
-                                    for="animalType" 
+                                    htmlFor="animalType" 
                                     className="block mb-2 text-sm font-semibold text-gray-900"
                                 >
                                     Animal Type
@@ -71,7 +71,7 @@ export default function EditAnimal({animal}) {
                                         name="animalType" 
                                         value={animalType}
                                         onChange={(e) => setAnimalType(e.target.value)}
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                         rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                         p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -92,9 +92,9 @@ export default function EditAnimal({animal}) {
                                 </div>
                             </div>
     
-                            <div className='w-1/2'>
+                            <div className='sm:w-full md:w-1/2'>
                                 <label 
-                                    for="animalBreed" 
+                                    htmlFor="animalBreed" 
                                     className="block mb-2 text-sm font-semibold text-gray-900"
                                 >
                                     Breed
@@ -105,7 +105,7 @@ export default function EditAnimal({animal}) {
                                         name="animalBreed" 
                                         value={animalBreed}
                                         onChange={(e) => setAnimalBreed(e.target.value)}
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                         rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                         p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -128,12 +128,12 @@ export default function EditAnimal({animal}) {
                         </section>
     
                         <section className='flex items-center gap-4 mb-5'>
-                            <div className='w-1/2'>
+                            <div className='sm:w-full md:w-1/2'>
                                 <label 
-                                    for="animalAge" 
+                                    htmlFor="animalAge" 
                                     className="block mb-2 text-sm font-semibold text-gray-900"
                                 >
-                                    Age
+                                    Age(Months)
                                 </label>
                                 <input 
                                     type="number" 
@@ -141,7 +141,7 @@ export default function EditAnimal({animal}) {
                                     value={animalAge}
                                     onChange={(e)=>setAnimalAge(e.target.value)}
                                     aria-describedby="helper-text-explanation" 
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -151,9 +151,9 @@ export default function EditAnimal({animal}) {
                                 />
                             </div>
     
-                            <div className='w-1/2'>
+                            <div className='sm:w-full md:w-1/2'>
                                 <label 
-                                    for="animalPrice" 
+                                    htmlFor="animalPrice" 
                                     className="block mb-2 text-sm font-semibold text-gray-900"
                                 >
                                     Price (Ksh)
@@ -164,7 +164,7 @@ export default function EditAnimal({animal}) {
                                     value={animalPrice}
                                     onChange={(e)=> setAnimalPrice(e.target.value)}
                                     aria-describedby="helper-text-explanation" 
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -177,7 +177,7 @@ export default function EditAnimal({animal}) {
     
                         <div className="mb-5">
                             <label 
-                                for="animalDescription" 
+                                htmlFor="animalDescription" 
                                 className="block mb-2 text-sm font-semibold text-gray-900"
                             >
                                 Description
@@ -199,7 +199,7 @@ export default function EditAnimal({animal}) {
                         <section className='flex items-start gap-4 mb-5'>
                             <div className='w-1/2'>
                                 <label 
-                                    for="animalQuantity" 
+                                    htmlFor="animalQuantity" 
                                     className="block mb-2 text-sm font-semibold text-gray-900"
                                 >
                                     Quantity
@@ -210,7 +210,7 @@ export default function EditAnimal({animal}) {
                                     value={animalQuantity}
                                     onChange={(e)=>setAnimalQuantity(e.target.value)}
                                     aria-describedby="helper-text-explanation" 
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -222,7 +222,7 @@ export default function EditAnimal({animal}) {
     
                             <div className='w-1/2'>
                                 <label 
-                                    for="animalPhoto" 
+                                    htmlFor="animalPhoto" 
                                     className="block mb-2 text-sm font-semibold text-gray-900"
                                 >
                                     Animal Photo
@@ -231,7 +231,7 @@ export default function EditAnimal({animal}) {
                                     id="animalPhoto"
                                     value={animalPhoto}
                                     onChange={(e)=>setAnimalPhoto(e.target.value)}
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 cursor-pointer" 
                                     type="file"

@@ -1,5 +1,3 @@
-# Standard library imports
-
 # Remote library imports
 from flask import Flask
 from flask_cors import CORS
@@ -12,7 +10,6 @@ from sqlalchemy import MetaData
 
 # Instantiate app, set attributes
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'absnbsyfz633'  # Add your secret key here
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False

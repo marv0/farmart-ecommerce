@@ -20,17 +20,31 @@ export default function DashboardLayout() {
         navigate(`/auth/login?redirect=${intendedUrl}`);
       }
     }, [])
+
+    const logout = () =>{
+      localStorage.removeItem("user")
+      toast.success('Logout succesful')
+      navigate('/auth/login')
+    }
     return(
       <section>
         <div>
-          <MainDashboardNav sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <MainDashboardNav sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} logout={logout} />
         </div>
         <div>
           <div>
-              <DashboardSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+              <DashboardSidebar 
+                sidebarOpen={sidebarOpen} 
+                setSidebarOpen={setSidebarOpen} 
+                logout={logout} 
+              />
           </div>
           <div>
-              <ResponsiveDasbhoardNav sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
+              <ResponsiveDasbhoardNav 
+                sidebarOpen={sidebarOpen} 
+                setSidebarOpen={setSidebarOpen} 
+                logout={logout}
+              />
           </div>
         </div>
         <div>

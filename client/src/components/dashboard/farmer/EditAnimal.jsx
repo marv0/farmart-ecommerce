@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { animalTypes } from '../../../utils/animalTypes'
 import { animalBreeds } from '../../../utils/animalBreeds'
 
-export default function EditAnimal({animal}) {
+export default function EditAnimal({animal, handleEditAnimalData}) {
     const [animalType, setAnimalType] = useState(animalTypes[0].name)
     const [animalBreed, setAnimalBreed] = useState(animalBreeds[0].name)
     const [animalAge, setAnimalAge] = useState('')
@@ -37,7 +37,8 @@ export default function EditAnimal({animal}) {
         }
 
         const jsonData = JSON.stringify(formData);
-        console.log("Submitted json Data for animal editing are:", jsonData)
+        // console.log("Submitted json Data for animal editing are:", jsonData)
+        handleEditAnimalData(jsonData)
     }
 
     return (

@@ -3,24 +3,33 @@ import { CiSearch } from "react-icons/ci";
 import { animalBreeds } from '../../utils/animalBreeds';
 import { animalTypes } from '../../utils/animalTypes';
 
-export default function FilterForm() {
+export default function FilterForm({ filterAnimals, resetFilters }) {
   const [searchTerm, setSearchTerm] = useState('')
-  const [breedSearch, setBreedSearch] = useState('')
-  const [typeSearch, setTypeSearch] = useState('')
+  const [animalBreedSearch, setAnimalBreedSearch] = useState('')
+  const [animalTypeSearch, setAnimalTypeSearch] = useState('')
+  const [minimumAge, setMinimumAge] = useState(0)
+  const [maximumAge, setMaximumAge] = useState(48)
 
   const formSubmit = (event) => {
     event.preventDefault();
 
-    const formData = {
+    const filterFormData = {
+      q: searchTerm,
+      breed: animalBreedSearch,
+      animal_type: animalTypeSearch,
+      min_age: minimumAge,
+      max_age: maximumAge,
     }
-    const jsonData = JSON.stringify(formData);
-    console.log(jsonData)
+    // const jsonData = JSON.stringify(filterFormData);
+    // console.log(jsonData)
+    filterAnimals(filterFormData)
   }
 
   const resetForm = () => {
     setSearchTerm('')
-    setBreedSearch('')
-    setTypeSearch('')
+    setAnimalBreedSearch('')
+    setAnimalTypeSearch('')
+    resetFilters()
   }
   return (
     <section>
@@ -42,7 +51,7 @@ export default function FilterForm() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 gap-6 mb-2">
 
                 <div className="flex flex-col">
                   <label 
@@ -54,8 +63,8 @@ export default function FilterForm() {
 
                   <select 
                     id="breed" 
-                    value={breedSearch}
-                    onChange={(e) => setBreedSearch(e.target.value)}
+                    value={animalBreedSearch}
+                    onChange={(e) => setAnimalBreedSearch(e.target.value)}
                     className="mt-2 block w-full rounded-md border border-gray-100 
                     bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-green-500 
                     focus:ring-1 focus:ring-green-400"
@@ -83,8 +92,8 @@ export default function FilterForm() {
 
                   <select 
                     id="breed" 
-                    value={typeSearch}
-                    onChange={(e) => setTypeSearch(e.target.value)}
+                    value={animalTypeSearch}
+                    onChange={(e) => setAnimalTypeSearch(e.target.value)}
                     className="mt-2 block w-full rounded-md border border-gray-100 
                     bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-green-500 
                     focus:ring-1 focus:ring-green-400"
@@ -103,6 +112,46 @@ export default function FilterForm() {
                   </select>
                 </div>
               </div>
+              <section className='flex items-center justify-between space-x-8'>
+                <div>
+                  <label 
+                    htmlFor="minimumAge" 
+                    class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                  >
+                    Min. Age(Months)
+                  </label>
+                  
+                  <input 
+                    type="number" 
+                    id="minimumAge" 
+                    value={minimumAge}
+                    onChange={(e) => setMinimumAge(e.target.value)} 
+                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 
+                    text-sm focus focus:ring-green-500 focus:border-green-500 block w-full py-2.5 px-2"
+                    placeholder="999" 
+                    required 
+                  />
+                </div>
+                <div>
+                  <label 
+                    htmlFor="maximumAge" 
+                    class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                  >
+                    Max. Age(Months)
+                  </label>
+                  
+                  <input 
+                    type="number" 
+                    id="maximumAge" 
+                    value={maximumAge}
+                    onChange={(e) => setMaximumAge(e.target.value)}
+                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 
+                    text-sm focus focus:ring-green-500 focus:border-green-500 block w-full py-2.5 px-2"
+                    placeholder="999" 
+                    required 
+                  />
+                </div>
+              </section>
 
               <div className="mt-6 grid w-full grid-cols-2 justify-end space-x-4 md:flex">
                 <button 
@@ -113,6 +162,7 @@ export default function FilterForm() {
                   Reset
                 </button>
                 <button 
+                  type='submit'
                   className="rounded-lg bg-green-600 px-8 py-2 font-medium text-white 
                   outline-none hover:opacity-80"
                 >

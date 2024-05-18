@@ -42,16 +42,35 @@ export default function AnimalDetailsModal({animalData, animalDetailsModalOpen, 
                           <span className="sr-only">Close modal</span>
                       </button>
                   </div>
-                  <div className="p-4 md:p-5 space-y-4">
-                    {animalData && 
-                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        {animalData.description}
-                      </p>
-                    }
-                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                          The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                      </p>
-                  </div>
+                  {animalData && 
+                    <div className="p-4 md:p-5 space-y-4">
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                          <span className='font-semibold text-black pr-2'>
+                            Type:
+                          </span>{animalData.type}
+                        </p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                          <span className='font-semibold text-black pr-2'>
+                            Breed:
+                          </span>{animalData.breed}
+                        </p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                          <span className='font-semibold text-black pr-2'>
+                            Age:
+                          </span>{animalData.age} Months
+                        </p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                          <span className='font-semibold text-black pr-2'>
+                            Price:
+                          </span>Ksh. {animalData.price}
+                        </p>
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                          <span className='font-semibold text-black pr-2'>
+                            Description:
+                          </span>{animalData.description}
+                        </p>
+                    </div>
+                  }
                   <div className="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                       <button
                         onClick={() => routeToEditAnimal(animalData)} 

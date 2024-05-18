@@ -3,6 +3,8 @@ import { BsThreeDots } from "react-icons/bs";
 import order01 from '../../../assets/angusCow.jpg'
 import OrderDetailsModal from './OrderDetailsModal';
 import CancelOrderModal from './CancelOrderModal';
+import { toast } from 'react-toastify';
+
 const activeOrders = [
     {
         id: 1,
@@ -130,6 +132,27 @@ export default function OrdersList() {
         setCancelOrderModalOpen(true)
     }
 
+    const cancelOrderConfirmed = async(order_id) => {
+        console.log('Order to be cancelled is:', order_id)
+        try {
+            const response = await fetch(`http://127.0.0.1:5555/cancel_order/${order_id}`, {
+                method: 'DELETE',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
+
+            const responseData = await response.json();
+            if(response.status === 200){
+                toast.success(responseData.message)
+            }else{
+                toast.error(responseData.error)
+            }
+        } catch (error) {
+            toast.error('An error occured. Please try again later')
+        }
+    }
   return (
     <div>
         <div className="overflow-x-auto py-8">
@@ -228,7 +251,7 @@ export default function OrdersList() {
                                                         dark:hover:text-white" 
                                                         role="menuitem"
                                                     >
-                                                        Cancel Ordery
+                                                        Cancel Order
                                                     </button>
                                                 </li>
                                                 )}
@@ -250,6 +273,7 @@ export default function OrdersList() {
                 cancelOrderModalOpen={cancelOrderModalOpen}
                 orderToCancel={orderToCancel}
                 setCancelOrderModalOpen={setCancelOrderModalOpen}
+                cancelOrderConfirmed={cancelOrderConfirmed}
             />
         </div>
     </div>

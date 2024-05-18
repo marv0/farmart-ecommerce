@@ -42,12 +42,36 @@ export default function FarmerEditAnimal() {
 
   //   fetchAnimal();
   // }, [animalId]);
+  const handleEditAnimalData = async(jsonData) => {
+    console.log('JSON DATA is:', jsonData)
+    console.log('And Animal ID is:', wantedAnimal.id)
+    try {
+      const response = await fetch(`http://127.0.0.1:5555/update_animal/${wantedAnimal.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        },
+        body: jsonData
+      });
+
+      const responseData = await response.json();
+      if(response.status === 200){
+        toast.success('Animal updated successfully.')
+      }else{
+        toast.error(responseData.error)
+      }
+    } catch (error) {
+      toast.error('An error occured. Please try again later!')
+    }
+  }
 
   return (
     <div>
         <EditAnimal 
           animal={wantedAnimal}
           loading={loading}
+          handleEditAnimalData={handleEditAnimalData}
         />
     </div>
   )

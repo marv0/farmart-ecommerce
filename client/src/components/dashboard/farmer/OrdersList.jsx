@@ -107,13 +107,14 @@ const activeOrders = [
         date: '2024-04-26'
     }
 ];
-export default function OrdersList() {
+export default function OrdersList({userOrders, loading}) {
     const [clickedItemIndex, setClickedItemIndex] = useState(null);
     const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
     const [cancelOrderModalOpen, setCancelOrderModalOpen] = useState(false)
     const [orderData, setOrderData] = useState(null)
     const [orderToCancel, setOrderToCancel] = useState(null)
-    const user = {id: 1, user_type:'farmer'}
+    const user = JSON.parse(localStorage.getItem('user'))
+    // const user = {id: 1, user_type:'farmer'}
     // const user = null
 
     const toggleBoxVisibility = (index) => {
@@ -153,6 +154,27 @@ export default function OrdersList() {
             toast.error('An error occured. Please try again later')
         }
     }
+
+    const acceptOrder = async(order_id) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5555/accept_order/${order_id}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
+
+            const responseData = await response.json();
+            if(response.status === 200){
+                toast.success(responseData.message)
+            }else{
+                toast.error(responseData.error)
+            }
+        } catch (error) {
+            toast.error('An error occured. Please try again later')
+        }
+    }
   return (
     <div>
         <div className="overflow-x-auto py-8">
@@ -171,9 +193,9 @@ export default function OrdersList() {
                         <th className="px-6 py-4 text-left text-sm font-semibold text-black">
                             Date Ordered
                         </th>
-                        <th className="px-6 py-4 text-left text-sm font-semibold text-black">
+                        {/* <th className="px-6 py-4 text-left text-sm font-semibold text-black">
                             Delivery Location
-                        </th>
+                        </th> */}
                         <th className="px-6 py-4 text-left text-sm font-semibold text-black">
                             Action
                         </th>
@@ -209,9 +231,9 @@ export default function OrdersList() {
                                 <td className="px-6 py-3 text-sm">
                                     {activeOrder.date}
                                 </td>
-                                <td className="px-6 py-3 text-sm">
+                                {/* <td className="px-6 py-3 text-sm">
                                     {'Nairobi, Kariobangi'}
-                                </td>
+                                </td> */}
 
                                 <td className="px-6 py-3 relative">
                                     <button
@@ -241,7 +263,21 @@ export default function OrdersList() {
                                                         Details
                                                     </button>
                                                 </li>
-                                                {user && user.user_type === 'farmer' && (
+                                                {user && user === 'farmer' && (
+                                                <li>
+                                                    <button 
+                                                        onClick={() => acceptOrder(activeOrder.id)}
+                                                        className="block px-4 py-2 text-sm 
+                                                        text-gray-700 hover:bg-gray-100 
+                                                        dark:text-gray-300 dark:hover:bg-gray-600 
+                                                        dark:hover:text-white" 
+                                                        role="menuitem"
+                                                    >
+                                                        Accept Order
+                                                    </button>
+                                                </li>
+                                                )}
+                                                {user && user === 'farmer' && (
                                                 <li>
                                                     <button 
                                                         onClick={() => cancelOrder(activeOrder)}
@@ -264,11 +300,13 @@ export default function OrdersList() {
                     })}
                 </tbody>
             </table>
-            <OrderDetailsModal 
-                orderData={orderData}
-                orderDetailsModalOpen={orderDetailsModalOpen}
-                setOrderDetailsModalOpen={setOrderDetailsModalOpen}
-            />
+            {orderData && (
+                <OrderDetailsModal 
+                    orderData={orderData}
+                    orderDetailsModalOpen={orderDetailsModalOpen}
+                    setOrderDetailsModalOpen={setOrderDetailsModalOpen}
+                />
+            )}
             <CancelOrderModal 
                 cancelOrderModalOpen={cancelOrderModalOpen}
                 orderToCancel={orderToCancel}

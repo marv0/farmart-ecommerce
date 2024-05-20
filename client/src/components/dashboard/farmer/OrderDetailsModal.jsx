@@ -37,17 +37,40 @@ export default function OrderDetailsModal({orderData, orderDetailsModalOpen, set
                       </div>
                       <div className="p-4 md:p-5 space-y-4">
                         {orderData && 
-                          <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            Ksh. {orderData.totalPrice}
+                          <p 
+                            className="text-base leading-relaxed text-gray-500 
+                            dark:text-gray-400"
+                          >
+                            <span className='font-semibold text-black pr-2'>
+                              Total Cost: 
+                            </span>
+                            <span>
+                              Ksh. {orderData.totalPrice}
+                            </span>
                           </p>
                         }
-                          <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                              The European Union’s General Data Protection Regulation (G.D.P.R.) 
-                              goes into effect on May 25 and is meant to ensure a common set of 
-                              data rights in the European Union. It requires organizations to 
-                              notify users as soon as possible of high-risk data breaches 
-                              that could personally affect them.
-                          </p>
+                        <p 
+                          className="text-base leading-relaxed text-gray-500 
+                            dark:text-gray-400"
+                        >
+                          <span className='font-semibold text-black pr-2'>
+                              Total Cost: 
+                          </span>
+                          <span>
+                              Ksh. {orderData.totalPrice}
+                          </span>
+                        </p>
+                        <p 
+                          className="text-base leading-relaxed text-gray-500 
+                            dark:text-gray-400"
+                        >
+                          <span className='font-semibold text-black pr-2'>
+                              Total Cost: 
+                          </span>
+                          <span>
+                              Ksh. {orderData.totalPrice}
+                          </span>
+                        </p>
                       </div>
                       <div 
                         className="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 

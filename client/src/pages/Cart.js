@@ -11,6 +11,9 @@ export default function Cart() {
     const totalPrice = useSelector(totalPriceSelector)
     const [modalOpen, setModalOpen] = useState(false)
 
+    const handleProceedWithPayment = async() => {
+        console.log('User has decided to proceed with payment')
+    }
     const handleFormNumberSubmitted = (mpesaNumber) => {
         console.log(mpesaNumber)
     }

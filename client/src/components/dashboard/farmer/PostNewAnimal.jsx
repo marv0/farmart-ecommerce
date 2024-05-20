@@ -17,11 +17,11 @@ export default function PostNewAnimal({handleAnimalData}) {
         const formData = {
             type: animalType,
             breed: animalBreed,
-            age: animalAge,
-            price: animalPrice,
+            age: Number(animalAge),
+            price: Number(animalPrice),
             description: animalDescription,
-            quantity: animalQuantity,
-            photo: animalPhoto
+            quantity: Number(animalQuantity),
+            // photo: animalPhoto
         }
 
         const jsonData = JSON.stringify(formData);
@@ -59,7 +59,7 @@ export default function PostNewAnimal({handleAnimalData}) {
                                     name="animalType" 
                                     value={animalType}
                                     onChange={(e) => setAnimalType(e.target.value)}
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -93,7 +93,7 @@ export default function PostNewAnimal({handleAnimalData}) {
                                     name="animalBreed" 
                                     value={animalBreed}
                                     onChange={(e) => setAnimalBreed(e.target.value)}
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -129,7 +129,7 @@ export default function PostNewAnimal({handleAnimalData}) {
                                 value={animalAge}
                                 onChange={(e)=>setAnimalAge(e.target.value)}
                                 aria-describedby="helper-text-explanation" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                 p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -152,7 +152,7 @@ export default function PostNewAnimal({handleAnimalData}) {
                                 value={animalPrice}
                                 onChange={(e)=> setAnimalPrice(e.target.value)}
                                 aria-describedby="helper-text-explanation" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                 p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -198,7 +198,7 @@ export default function PostNewAnimal({handleAnimalData}) {
                                 value={animalQuantity}
                                 onChange={(e)=>setAnimalQuantity(e.target.value)}
                                 aria-describedby="helper-text-explanation" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                 p-2.5 dark:bg-gray-700 dark:border-gray-600 
                                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
@@ -219,7 +219,7 @@ export default function PostNewAnimal({handleAnimalData}) {
                                 id="animalPhoto"
                                 value={animalPhoto}
                                 onChange={(e)=>setAnimalPhoto(e.target.value)}
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                 p-2.5 cursor-pointer" 
                                 type="file"

@@ -6,13 +6,14 @@ import { toast } from 'react-toastify';
 export default function FarmerPostAnimal() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'));
+  // const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNjIxNDIzOCwianRpIjoiYTZkNDI0NzktNjc2MC00NGJkLTllNjYtZjgzYjljZjdlZTQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6NSwidXNlcl90eXBlIjoiZmFybWVyIn0sIm5iZiI6MTcxNjIxNDIzOCwiY3NyZiI6IjdmYzg0Y2NlLWRhNGItNGMzZS05MDNiLWU4ZjE2Nzk3ZjUxOSIsImV4cCI6MTcxNjIxNzgzOH0.5RRO1XQJI3myhbp0sGzcgrRNCgWdSQK3w7Bf07WlN7E"
 
   useEffect(() => {
     if(!user){
       toast.error('Access denied')
       navigate('/auth/login')
     }
-    if(user.user_type !== 'farmer'){
+    if(user !== 'farmer'){
       toast.error('Access denied')
       navigate('/user-dashboard')
     }
@@ -20,11 +21,13 @@ export default function FarmerPostAnimal() {
 
   const handleAnimalData = async(animalData) => {
     try {
+      const access_token = localStorage.getItem('access_token')
+      console.log(access_token)
       const response = await fetch(`http://127.0.0.1:5555/add_animal`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
         },
         body: animalData
       });
@@ -35,7 +38,8 @@ export default function FarmerPostAnimal() {
         toast.success('Animal Succesfully Created')
       }else{
         // toast.error(responseData.error)
-        console.log(responseData.error)
+        // console.log(responseData.error)
+        console.error('Error response from server:', responseData);
       }
     } catch (error) {
       // toast.error('An error occured')

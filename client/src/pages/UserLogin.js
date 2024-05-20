@@ -52,8 +52,8 @@ export default function UserLogin() {
 
                 const responseData = await response.json();
                 if(response.status === 200){
-                    localStorage.setItem("user", JSON.stringify(user_data));
-                    localStorage.setItem("access_token", JSON.stringify(responseData.access_token));
+                    localStorage.setItem("user", JSON.stringify(responseData.user_type));
+                    localStorage.setItem("access_token", responseData.access_token);
                     toast.success('Succesfully Logged in')
                     setLoading(false)
                     const searchParams = new URLSearchParams(location.search);

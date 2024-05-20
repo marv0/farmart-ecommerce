@@ -15,7 +15,7 @@ export default function FarmerEditAnimal() {
   console.log('Animal ID is:', animalId)
 
   useEffect(() => {
-    if(user.user_type !== 'farmer'){
+    if(user !== 'farmer'){
       toast.error('Unauthorized access')
       navigate('/')
     }

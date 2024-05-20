@@ -1,16 +1,25 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, productQtyInCartSelector } from '../../store/features/CartSlice'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 export default function AnimalCard({animal}) {
     const qty = useSelector(state=>productQtyInCartSelector(state, animal.id))
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleCartAddition = async(animal) => {
+        dispatch(increment(animal))
+        toast.success('Animal succesfully added to cart')
+        navigate('/cart')
+    }
 
     function AddToCart(){
         if(!qty){
             return(
                 <button 
-                    onClick={() => dispatch(increment(animal))}
+                    onClick={() => handleCartAddition(animal)}
                     className="text-white bg-green-600 hover:bg-green-700 
                     font-medium rounded-lg text-sm px-5 py-2 text-center"
                 >

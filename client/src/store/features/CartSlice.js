@@ -13,11 +13,11 @@ export const cartSlice = createSlice({
                 (el)=> el.animal.id === action.payload.id
             )
             if(item){
-                item.qty++
+                item.quantity++
             }else{
                 state.cartItems.push({
                     animal:action.payload,
-                    qty:1,
+                    quantity:1,
                 })
             }
         },
@@ -26,8 +26,8 @@ export const cartSlice = createSlice({
                 (el)=> el.animal.id === action.payload.id
             )
             if(item){
-                item.qty--;
-                if(item.qty===0){
+                item.quantity--;
+                if(item.quantity===0){
                     state.cartItems = state.cartItems.filter(
                         (el)=> el.animal.id !== action.payload.id
                     );
@@ -50,15 +50,15 @@ export const cartSlice = createSlice({
 const cartItems = (state) => state.cart.cartItems;
 
 export const totalCartItemsSelector = createSelector([cartItems], (cartItems)=>
-    cartItems.reduce((total, curr)=>(total+=curr.qty), 0)
+    cartItems.reduce((total, curr)=>(total+=curr.quantity), 0)
 );
 
 export const totalPriceSelector = createSelector([cartItems], (cartItems)=>
-    cartItems.reduce((total,curr)=>(total+= curr.qty * curr.animal.price), 0)
+    cartItems.reduce((total,curr)=>(total+= curr.quantity * curr.animal.price), 0)
 )
 
 export const productQtyInCartSelector = createSelector([cartItems, (cartItems,animalId)=>animalId],
-    (cartItems,animalId)=>cartItems.find((el)=>el.animal.id===animalId)?.qty
+    (cartItems,animalId)=>cartItems.find((el)=>el.animal.id===animalId)?.quantity
 )
 
 export const {increment, decrement, removeItem} = cartSlice.actions;

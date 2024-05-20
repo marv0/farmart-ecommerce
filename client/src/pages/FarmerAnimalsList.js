@@ -11,14 +11,27 @@ export default function FarmerAnimalsList() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    if(user && user.user_type === 'farmer'){
+    if(user && user === 'farmer'){
       setLoading(true)
       const fetchFarmerAnimals = async () => {
         try {
-          const response = await fetch('http://127.0.0.1:5555/');
+          const response = await fetch('http://127.0.0.1:5555/get_farmer_animals', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+              'Content-Type': 'application/json',
+            },
+          });
           const data = await response.json();
-          setCurrentFarmerAnimals(data)
-          setLoading(false)
+          if(response.status === 200){
+            setCurrentFarmerAnimals(data.animals)
+            setLoading(false)
+          }else{
+            toast.error('Unauthorized access')
+            setLoading(false)
+            navigate('/user-dashboard')
+          }
+          
         } catch (error) {
           toast.error('An error occured. Please try again later')
           setLoading(false)
@@ -36,7 +49,8 @@ export default function FarmerAnimalsList() {
   return (
     <div>
         <AnimalsList 
-          animals={animals}
+          // animals={animals}
+          animals={currentFarmerAnimals}
         />
     </div>
   )

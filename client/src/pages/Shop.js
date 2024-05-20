@@ -8,12 +8,6 @@ export default function Shop() {
   const [animalsList, setAnimalsList] = useState([])
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    setLoading(true)
-    setAnimalsList(animals)
-    setLoading(false)
-  }, [])
-
   const filterAnimals = async (filters) => {
     const query = new URLSearchParams(filters).toString();
     console.log('Query is: ', query)
@@ -40,38 +34,38 @@ export default function Shop() {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchAllAnimals = async () => {
-  //     try {
-  //       setLoading(true)
-  //       const response = await fetch('http://127.0.0.1:5555/animals');
-  //       const data = await response.json();
-  //       setAnimalsList(data)
-  //       setLoading(false)
-  //     } catch (error) {
-  //       toast.error('An unexpected error occured. Please try again later')
-  //       setLoading(false)
-  //     }
-  //   }
-  //   fetchAllAnimals()
-  // }, [])
+  useEffect(() => {
+    const fetchAllAnimals = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('http://127.0.0.1:5555/animals');
+        const data = await response.json();
+        setAnimalsList(data)
+        setLoading(false)
+      } catch (error) {
+        toast.error('An unexpected error occured. Please try again later')
+        setLoading(false)
+      }
+    }
+    fetchAllAnimals()
+  }, [])
 
   function LoadingState(){
     return(
-      <div>
-        <p>
+      <div className="pt-4 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <p className='text-red-600 text-center'>
           Please wait as we load animals...
         </p>
       </div>
     )
   }
 
-  if(animalsList.length === 0){
+  function NoAnimalsFound() {
     return(
-      <div>
-        <p>
-          No animals found
-        </p>
+      <div className="pt-4 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <h1 className='text-red-600 text-center'>
+          No animals found.
+        </h1>
       </div>
     )
   }
@@ -87,8 +81,10 @@ export default function Shop() {
             <div className='col-span-9'>
               {loading ? (
                 <LoadingState />
+              ) : animalsList.length === 0 ? (
+                <NoAnimalsFound />
               ) : (
-                <AnimalsList animals={animalsList}/>
+                <AnimalsList animals={animalsList} />
               )}
             </div>
         </section>

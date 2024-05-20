@@ -2,18 +2,25 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
-// import friesianCow from '../assets/friesian.jpg'
+import { useNavigate } from 'react-router-dom'
 import { animals } from '../utils/animals'
 import { increment, decrement, productQtyInCartSelector } from '../store/features/CartSlice'
 
 function CartButton({animal}){
     const qty = useSelector(state=>productQtyInCartSelector(state, animal.id))
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleCartAddition = async(animal) => {
+        dispatch(increment(animal))
+        toast.success('Animal succesfully added to cart')
+        navigate('/cart')
+    }
 
     if(!qty){
         return(
             <button 
-                onClick={() => dispatch(increment(animal))}
+                onClick={() => handleCartAddition(animal)}
                 className="w-full bg-green-700 dark:bg-gray-600 text-white 
                 py-2 px-4 rounded-full font-bold hover:bg-gray-800 
                 dark:hover:bg-gray-700"
@@ -37,36 +44,37 @@ export default function AnimalDetails() {
     const animalId = parseInt(useParams().animalId);
     const [animal, setAnimal] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [wantedAnimal, setWantedAnimal] = useState(null)
-
-    useEffect(() => {
-        setLoading(true);
-        const wantedAnimal = animals.find(animal => animal.id === animalId);
-        setAnimal(wantedAnimal)
-        setLoading(false);
-    }, [animalId]);
+    // const [wantedAnimal, setWantedAnimal] = useState(null)
 
     // useEffect(() => {
-    //     const fetchAnimal = async () => {
-    //       try {
-    //         setLoading(true)
-    //         const response = await fetch(`http://127.0.0.1:5555/${animalId}`);
-    //         if (!response.ok) {
-    //           throw new Error('Network response was not ok');
-    //         }
-    //         const data = await response.json();
-    //         setWantedAnimal(data);
-    //         setLoading(false);
-    //       } catch (error) {
-    //         toast.error('An unexpected error occurred');
-    //         console.error('Error fetching animal:', error);
-    //       } finally {
-    //         setLoading(false);
-    //       }
-    //     };
+    //     setLoading(true);
+    //     const wantedAnimal = animals.find(animal => animal.id === animalId);
+    //     setAnimal(wantedAnimal)
+    //     setLoading(false);
+    // }, [animalId]);
+
+    useEffect(() => {
+        const fetchAnimal = async () => {
+          try {
+            setLoading(true)
+            const response = await fetch(`http://127.0.0.1:5555/animal/${animalId}`);
+            // if (!response.ok) {
+            //   throw new Error('Network response was not ok');
+            // }
+            const data = await response.json();
+            // setWantedAnimal(data);
+            setAnimal(data)
+            setLoading(false);
+          } catch (error) {
+            toast.error('An unexpected error occurred');
+            console.error('Error fetching animal:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
     
-    //     fetchAnimal();
-    //   }, [animalId]);
+        fetchAnimal();
+      }, [animalId]);
 
     if(loading){
         return(

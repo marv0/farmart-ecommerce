@@ -116,7 +116,7 @@ export default function FilterForm({ filterAnimals, resetFilters }) {
                 <div>
                   <label 
                     htmlFor="minimumAge" 
-                    class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
                   >
                     Min. Age(Months)
                   </label>
@@ -126,7 +126,7 @@ export default function FilterForm({ filterAnimals, resetFilters }) {
                     id="minimumAge" 
                     value={minimumAge}
                     onChange={(e) => setMinimumAge(e.target.value)} 
-                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 
+                    className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 
                     text-sm focus focus:ring-green-500 focus:border-green-500 block w-full py-2.5 px-2"
                     placeholder="999" 
                     required 
@@ -135,7 +135,7 @@ export default function FilterForm({ filterAnimals, resetFilters }) {
                 <div>
                   <label 
                     htmlFor="maximumAge" 
-                    class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
                   >
                     Max. Age(Months)
                   </label>
@@ -145,7 +145,7 @@ export default function FilterForm({ filterAnimals, resetFilters }) {
                     id="maximumAge" 
                     value={maximumAge}
                     onChange={(e) => setMaximumAge(e.target.value)}
-                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 
+                    className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 
                     text-sm focus focus:ring-green-500 focus:border-green-500 block w-full py-2.5 px-2"
                     placeholder="999" 
                     required 

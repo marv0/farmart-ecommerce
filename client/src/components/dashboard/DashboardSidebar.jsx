@@ -38,7 +38,7 @@ export default function DashboardSidebar({sidebarOpen, setSidebarOpen, logout}) 
                             </span>
                         </a>
                     </li>
-                    {user && user.user_type === 'farmer' && (
+                    {user && user === 'farmer' && (
                         <>
                             <li>
                                 <a 

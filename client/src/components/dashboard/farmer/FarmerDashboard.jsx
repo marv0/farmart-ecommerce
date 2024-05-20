@@ -14,6 +14,13 @@ export default function FarmerDashboard() {
             <InfoCards />
         </section>
         <section>
+          <div className="mx-auto max-w-7xl pt-4 text-center">
+            <h1 
+              className="text-3xl font-bold tracking-tight text-gray-900"
+            >
+              Your Pending Orders
+            </h1>
+          </div>
             <OrdersList activeOrders={animals} />
             {/* <AnimalsList animals={animals} /> */}
             {/* <PostNewAnimal /> */}

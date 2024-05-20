@@ -18,26 +18,25 @@ export default function Dashboard() {
   return (
     <div>
       <section>
-        <div>
-          {user && user.is_customer ? (
-            <h1>
+        <div className='pb-4'>
+          {user && user === 'customer' ? (
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
               Welcome to your User Dashboard
             </h1>
           ) : (
-            <h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
               Welcome to your Farmer Dashboard
             </h1>
           )}
-          
         </div>
       </section>
       <section>
-        {user && user.user_type === 'farmer' &&
+        {user && user === 'farmer' &&
           (
             <FarmerDashboard />
           )
         }
-        {user && user.user_type === 'customer' &&
+        {user && user === 'customer' &&
           (
             <CustomerDashboard />
           )

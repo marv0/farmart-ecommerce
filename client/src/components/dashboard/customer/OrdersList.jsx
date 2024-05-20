@@ -131,7 +131,7 @@ export default function OrdersList() {
                             Date Ordered
                         </th>
                         <th className="px-6 py-4 text-left text-sm font-semibold text-black">
-                            Delivery Location
+                            Status
                         </th>
                         <th className="px-6 py-4 text-left text-sm font-semibold text-black">
                             Action
@@ -169,7 +169,7 @@ export default function OrdersList() {
                                     {activeOrder.date}
                                 </td>
                                 <td className="px-6 py-3 text-sm">
-                                    {'Nairobi, Kariobangi'}
+                                    Pending
                                 </td>
 
                                 <td className="px-6 py-3 relative">

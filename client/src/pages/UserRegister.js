@@ -11,7 +11,7 @@ export default function UserRegister() {
     const [password, setPassword] = useState('') 
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    const user_type = 'consumer'
+    const user_type = 'customer'
 
     const handleUserRegistrationSubmit = async(event) => {
         event.preventDefault(); 

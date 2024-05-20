@@ -3,11 +3,24 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request, jsonify, flash, redirect, url_for
-from config import app, db  # Import Flask app and SQLAlchemy instance from config
 from sqlalchemy import or_
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from datetime import timedelta
+
+# Import Flask app and SQLAlchemy instance from config
+from config import app, db  
 
 # Add your model imports
 from models import User, Farmer, Animal, Order, db
+
+# # Initialize LoginManager
+# login_manager = LoginManager()
+# login_manager.login_view = 'login'  # Specify the login route
+# login_manager.init_app(app)
+
+# Initialize extensions
+# db = SQLAlchemy(app)
+jwt = JWTManager(app)
 
 # Initialize LoginManager
 login_manager = LoginManager()
@@ -50,26 +63,18 @@ def login():
 
     # Check if user exists
     user = User.query.filter_by(username=username).first()
-    if user:
-        if check_password_hash(user.password, password):
-            login_user(user)
-            return jsonify({'message': 'Login successful.'}), 200
+    if user and check_password_hash(user.password, password):
+        access_token = create_access_token(identity={'id': user.id, 'user_type': user.user_type})
+        return jsonify({'message': 'Login successful.', 'access_token': access_token, 'user_type': user.user_type}), 200
 
     return jsonify({'error': 'Invalid username or password. Please try again.'}), 401
 
-# Define route for user logout
+# Define route for user logout (if needed)
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return jsonify({'message': 'You have been logged out.'}), 200
-
-# # Define route for listing animals
-# @app.route('/animals')
-# def list_animals():
-#     animals = Animal.query.all()
-#     animal_data = [{'id': animal.id, 'type': animal.type, 'breed': animal.breed, 'age': animal.age, 'price': animal.price, 'description': animal.description} for animal in animals]
-#     return jsonify(animal_data)
 
 # Define route for listing animals with search and filter options
 @app.route('/animals', methods=['GET'])
@@ -111,9 +116,10 @@ def list_animals():
 
 # Define route for adding a new animal (for farmers)
 @app.route('/add_animal', methods=['POST'])
-@login_required
+@jwt_required()
 def add_animal():
-    if current_user.user_type != 'farmer':
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'farmer':
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     data = request.get_json()
@@ -124,7 +130,7 @@ def add_animal():
     description = data.get('description')
     quantity = data.get('quantity')
 
-    new_animal = Animal(farmer_id=current_user.id, type=type, breed=breed, age=age, price=price, description=description, quantity=quantity)
+    new_animal = Animal(farmer_id=current_user['id'], type=type, breed=breed, age=age, price=price, description=description, quantity=quantity)
     db.session.add(new_animal)
     db.session.commit()
 
@@ -132,10 +138,11 @@ def add_animal():
 
 # Define route for updating an animal (for farmers)
 @app.route('/update_animal/<int:animal_id>', methods=['PUT'])
-@login_required
+@jwt_required()
 def update_animal(animal_id):
     animal = Animal.query.get_or_404(animal_id)
-    if current_user.user_type != 'farmer' or animal.farmer_id != current_user.id:
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'farmer' or animal.farmer_id != current_user['id']:
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     data = request.get_json()
@@ -151,10 +158,11 @@ def update_animal(animal_id):
 
 # Define route for deleting an animal (for farmers)
 @app.route('/delete_animal/<int:animal_id>', methods=['DELETE'])
-@login_required
+@jwt_required()
 def delete_animal(animal_id):
     animal = Animal.query.get_or_404(animal_id)
-    if current_user.user_type != 'farmer' or animal.farmer_id != current_user.id:
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'farmer' or animal.farmer_id != current_user['id']:
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     db.session.delete(animal)
@@ -163,10 +171,11 @@ def delete_animal(animal_id):
 
 # Define route for placing an order (for consumers)
 @app.route('/place_order/<int:animal_id>', methods=['POST'])
-@login_required
+@jwt_required()
 def place_order(animal_id):
     animal = Animal.query.get_or_404(animal_id)
-    if current_user.user_type != 'consumer':
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'consumer':
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     data = request.get_json()
@@ -179,11 +188,27 @@ def place_order(animal_id):
     if quantity > animal.quantity:
         return jsonify({'error': 'Insufficient stock.'}), 400
 
-    new_order = Order(buyer_id=current_user.id, animal_id=animal.id, quantity=quantity, total_price=total_price)
+    new_order = Order(buyer_id=current_user['id'], animal_id=animal.id, quantity=quantity, total_price=total_price)
     db.session.add(new_order)
     db.session.commit()
 
     return jsonify({'message': 'Order placed successfully.'}), 201
+
+# Define route for accepting an order (for farmers)
+@app.route('/accept_order/<int:order_id>', methods=['PUT'])
+@jwt_required()
+def accept_order(order_id):
+    order = Order.query.get_or_404(order_id)
+    current_user = get_jwt_identity()
+    if current_user['user_type'] == 'farmer' and order.animal.farmer_id == current_user['id']:
+        if order.quantity > order.animal.quantity:
+            return jsonify({'error': 'Insufficient stock to accept this order.'}), 400
+        order.animal.quantity -= order.quantity
+        order.status = 'accepted'
+        db.session.commit()
+        return jsonify({'message': 'Order accepted successfully.'}), 200
+    else:
+        return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
 # Define a simple route for testing
 @app.route('/')

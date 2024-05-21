@@ -43,6 +43,9 @@ export const cartSlice = createSlice({
                     (el)=> el.animal.id !== action.payload.id
                 );
             }
+        },
+        clearCart: (state, action) => { //Clearing cart
+            state.cartItems = [];
         }
     }
 })
@@ -61,5 +64,5 @@ export const productQtyInCartSelector = createSelector([cartItems, (cartItems,an
     (cartItems,animalId)=>cartItems.find((el)=>el.animal.id===animalId)?.quantity
 )
 
-export const {increment, decrement, removeItem} = cartSlice.actions;
+export const {increment, decrement, removeItem, clearCart} = cartSlice.actions;
 export default cartSlice.reducer;

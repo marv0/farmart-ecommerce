@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import AnimalsList from '../components/dashboard/farmer/AnimalsList'
-import { animals } from '../utils/animals'
+// import { animals } from '../utils/animals'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,6 +46,15 @@ export default function FarmerAnimalsList() {
     }
   }, [navigate, user])
 
+  if(loading){
+    return(
+      <div>
+        <h1>
+          Loading. Please wait.....
+        </h1>
+      </div>
+    )
+  }
   return (
     <div>
         <AnimalsList 

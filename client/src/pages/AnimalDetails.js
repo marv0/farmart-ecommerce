@@ -3,8 +3,8 @@ import {useParams} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'
-import { animals } from '../utils/animals'
-import { increment, decrement, productQtyInCartSelector } from '../store/features/CartSlice'
+// import { animals } from '../utils/animals'
+import { increment, removeItem,  productQtyInCartSelector } from '../store/features/CartSlice'
 
 function CartButton({animal}){
     const qty = useSelector(state=>productQtyInCartSelector(state, animal.id))
@@ -15,6 +15,11 @@ function CartButton({animal}){
         dispatch(increment(animal))
         toast.success('Animal succesfully added to cart')
         navigate('/cart')
+    }
+
+    const handleCartRemoval = async(animal) => {
+        dispatch(removeItem(animal))
+        toast.success('Animal succesfully added to cart')
     }
 
     if(!qty){
@@ -31,10 +36,9 @@ function CartButton({animal}){
     }
     return(
         <button 
-            onClick={() => dispatch(decrement(animal))}
-            className="w-full bg-green-700 dark:bg-gray-600 text-white 
-            py-2 px-4 rounded-full font-bold hover:bg-gray-800 
-            dark:hover:bg-gray-700"
+            onClick={() => handleCartRemoval(animal)}
+            className="w-full bg-red-700 text-white 
+            py-2 px-4 rounded-full font-bold hover:bg-red-800"
         >
             Remove From Cart
         </button>

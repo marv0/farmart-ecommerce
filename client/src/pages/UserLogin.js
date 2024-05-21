@@ -3,10 +3,6 @@ import { toast } from 'react-toastify';
 import { FaSpinner } from "react-icons/fa";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const user_data = {
-    id: 1, 
-    user_type: 'farmer'
-}
 export default function UserLogin() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -54,6 +50,7 @@ export default function UserLogin() {
                 if(response.status === 200){
                     localStorage.setItem("user", JSON.stringify(responseData.user_type));
                     localStorage.setItem("access_token", responseData.access_token);
+                    console.log(responseData.user_type)
                     toast.success('Succesfully Logged in')
                     setLoading(false)
                     const searchParams = new URLSearchParams(location.search);
@@ -63,11 +60,6 @@ export default function UserLogin() {
                     toast.error(responseData.error)
                     setLoading(false)
                 }
-                // const searchParams = new URLSearchParams(location.search);
-                // const redirectTo = searchParams.get('redirect') || '/dashboard';
-                // navigate(redirectTo);
-                console.log(responseData.error)
-                setLoading(false)
             } catch (error) {
                 toast.error('An error occured')
                 setLoading(false)
@@ -122,12 +114,12 @@ export default function UserLogin() {
                             >
                                 Password
                             </label>
-                            <a 
+                            {/* <a 
                                 href="/#" 
                                 className="text-xs text-gray-500 hover:text-green-500"
                             >
                                 Forgot Password?
-                            </a>
+                            </a> */}
                         </div>
                         <input 
                             className="bg-gray-200 text-gray-700 focus:outline-none 

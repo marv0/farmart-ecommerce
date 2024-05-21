@@ -66,12 +66,6 @@ export default function UserRegister() {
                 setLoading(false)
             }
         }
-
-        // Reset form fields if needed
-        // setUsername('');
-        // setEmail('');
-        // setPassword('');
-        // setConfirmPassword('');
     };
   return (
     <div>

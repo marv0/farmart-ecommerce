@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import AnimalsList from '../components/shop/AnimalsList'
 import FilterForm from '../components/shop/FilterForm'
-import { animals } from '../utils/animals'
 import { toast } from 'react-toastify'
 
 export default function Shop() {

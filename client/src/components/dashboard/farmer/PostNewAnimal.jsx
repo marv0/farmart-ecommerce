@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { animalTypes } from '../../../utils/animalTypes'
 import { animalBreeds } from '../../../utils/animalBreeds'
 
-export default function PostNewAnimal({handleAnimalData}) {
+export default function PostNewAnimal({handleAnimalData, loading}) {
     const [animalType, setAnimalType] = useState(animalTypes[0].name)
     const [animalBreed, setAnimalBreed] = useState(animalBreeds[0].name)
     const [animalAge, setAnimalAge] = useState(1)
@@ -234,13 +234,25 @@ export default function PostNewAnimal({handleAnimalData}) {
                     </section>
 
                     <div className='flex justify-center'>
-                        <button 
-                            type="submit" 
-                            className="text-white bg-green-600 hover:bg-green-800
-                            font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        >
-                            Post Now
-                        </button>
+                        {loading ? (
+                            <button 
+                                type="button" 
+                                className="text-white bg-green-600 hover:bg-green-800
+                                font-medium rounded-lg text-sm px-5 py-2.5 text-center 
+                                disabled:bg-gray-300 disabled:text-gray-500"
+                                disabled
+                            >
+                                Please Wait...
+                            </button>
+                        ) : (
+                            <button 
+                                type="submit" 
+                                className="text-white bg-green-600 hover:bg-green-800
+                                font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            >
+                                Post Now
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>

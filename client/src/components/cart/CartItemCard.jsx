@@ -34,7 +34,7 @@ export default function CartItemCard({animal}) {
                 <img 
                     src={animal.photo} 
                     className="w-full h-full object-contain rounded-md" 
-                    alt='Cart Animal'
+                    alt={animal.type}
                 />
             </div>
             <div>

@@ -46,6 +46,7 @@ export default function FarmerEditAnimal() {
     console.log('JSON DATA is:', jsonData)
     console.log('And Animal ID is:', wantedAnimal.id)
     try {
+      setLoading(true)
       const response = await fetch(`http://127.0.0.1:5555/update_animal/${wantedAnimal.id}`, {
         method: 'PUT',
         headers: {
@@ -57,12 +58,18 @@ export default function FarmerEditAnimal() {
 
       const responseData = await response.json();
       if(response.status === 200){
+        setLoading(false)
         toast.success('Animal updated successfully.')
+        navigate('/farmer/animals')
       }else{
         toast.error(responseData.error)
+        setLoading(false)
+        navigate('/user-dashboard')
       }
     } catch (error) {
       toast.error('An error occured. Please try again later!')
+      setLoading(false)
+      navigate('/user-dashboard')
     }
   }
 

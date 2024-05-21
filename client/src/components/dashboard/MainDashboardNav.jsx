@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../assets/logo.webp'
+import avatar from '../../assets/avatar.png'
 
 export default function MainDashboardNav({sidebarOpen, setSidebarOpen}) {
     return (
@@ -43,9 +44,18 @@ export default function MainDashboardNav({sidebarOpen, setSidebarOpen}) {
                 <div className="flex items-center">
                     <div className="flex items-center ms-3">
                         <div>
-                        <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button 
+                            type="button" 
+                            className="flex text-sm bg-gray-800 rounded-full" 
+                            aria-expanded="false" 
+                            data-dropdown-toggle="dropdown-user"
+                        >
                             <span className="sr-only">Open user menu</span>
-                            <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user phot" />
+                            <img 
+                                className="w-8 h-8 rounded-full" 
+                                src={avatar}
+                                alt="user phot" 
+                            />
                         </button>
                         </div>
                         <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">

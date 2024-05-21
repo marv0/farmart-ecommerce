@@ -1,7 +1,16 @@
-import React from 'react'
-import OrdersList from './OrdersList'
+import React, {useState, useEffect} from 'react'
+// import OrdersList from './OrdersList'
+import OrdersList from '../farmer/OrdersList'
 
-export default function CustomerDashboard() {
+export default function CustomerDashboard({userOrders}) {
+  const [pendingOrders, setPendingOrders] = useState(null)
+
+  useEffect(() => {
+    if (userOrders && userOrders.length > 0) {
+      const filteredOrders = userOrders.filter(order => order.status === 'pending');
+      setPendingOrders(filteredOrders);
+    }
+  }, [])
   return (
     <div>
       <div className="mx-auto max-w-7xl pt-2 text-center">
@@ -12,7 +21,9 @@ export default function CustomerDashboard() {
         </h1>
       </div>
         <section>
-            <OrdersList />
+            <OrdersList 
+              userOrders={pendingOrders} 
+            />
         </section>
     </div>
   )

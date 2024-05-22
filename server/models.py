@@ -22,6 +22,7 @@ class User(db.Model, UserMixin, SerializerMixin):
 
 # Define Animal model
 class Animal(db.Model):
+
     __tablename__ = 'animals'
     id = db.Column(db.Integer, primary_key=True)
     farmer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

@@ -164,7 +164,9 @@ def add_animal():
 
     data = request.form
     type = data.get('type')
+
     print('Animal type is:', type)
+
     breed = data.get('breed')
     age = data.get('age')
     price = data.get('price')
@@ -172,6 +174,7 @@ def add_animal():
     quantity = data.get('quantity')
 
     print('Submitted data is: ', data)
+
     if 'image' not in request.files:
         return jsonify({'error': 'Image file is required.'}), 400
     
@@ -355,6 +358,7 @@ def view_consumer_orders():
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     consumer_orders = Order.query.filter_by(buyer_id=current_user['id']).all()
+    
     order_data = [{
             'id': order.id,
             'animal_type': order.animal.type,

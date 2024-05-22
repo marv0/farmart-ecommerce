@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function AnimalDetailsModal({animalData, animalDetailsModalOpen, setAnimalDetailsModalOpen}) {
+export default function AnimalDetailsModal({animalData, deleteAnimal, animalDetailsModalOpen, setAnimalDetailsModalOpen}) {
   const navigate = useNavigate();
 
   const routeToEditAnimal = (animal) => {
@@ -72,6 +72,16 @@ export default function AnimalDetailsModal({animalData, animalDetailsModalOpen, 
                     </div>
                   }
                   <div className="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                      <button
+                        onClick={() => deleteAnimal(animalData.id)} 
+                        data-modal-hide="default-modal" 
+                        type="button" 
+                        className="text-white bg-red-600 hover:bg-red-700 
+                        font-medium rounded-lg text-sm 
+                        px-5 py-2.5 text-center mr-auto"
+                      >
+                        Delete Animal
+                      </button>
                       <button
                         onClick={() => routeToEditAnimal(animalData)} 
                         data-modal-hide="default-modal" 

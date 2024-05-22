@@ -23,13 +23,11 @@ export default function FarmerPostAnimal() {
   const handleAnimalData = async(animalData) => {
     try {
       setLoading(true)
-      const access_token = localStorage.getItem('access_token')
-      console.log(access_token)
       const response = await fetch(`http://127.0.0.1:5555/add_animal`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-          'Content-Type': 'application/json',
+          mode:"no-cors",
         },
         body: animalData
       });
@@ -43,7 +41,7 @@ export default function FarmerPostAnimal() {
       }else{
         toast.error(responseData.error)
         setLoading(false)
-        navigate('/user-dashboard')
+        // navigate('/user-dashboard')
       }
     } catch (error) {
       // toast.error('An error occured')

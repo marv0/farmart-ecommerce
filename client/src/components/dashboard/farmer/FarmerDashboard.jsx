@@ -7,7 +7,7 @@ import { animals } from '../../../utils/animals'
 // import EditAnimal from './EditAnimal'
 
 export default function FarmerDashboard({userOrders}) {
-  const [pendingOrders, setPendingOrders] = useState(null)
+  const [pendingOrders, setPendingOrders] = useState([])
 
   useEffect(() => {
     if (userOrders && userOrders.length > 0) {
@@ -18,24 +18,26 @@ export default function FarmerDashboard({userOrders}) {
   return (
     <div>
         <section>
-            <InfoCards />
-        </section>
-        <section>
-          <div className="mx-auto max-w-7xl pt-4 text-center">
-            <h1 
-              className="text-3xl font-bold tracking-tight text-gray-900"
-            >
-              Your Pending Orders
-            </h1>
-          </div>
-            <OrdersList
-              activeOrders={animals} 
-              userOrders={pendingOrders}
+            <InfoCards
+              pendingOrders={pendingOrders}
+              userOrders ={userOrders}
             />
-            {/* <AnimalsList animals={animals} /> */}
-            {/* <PostNewAnimal /> */}
-            {/* <EditAnimal animal={wantedAnimal}/> */}
         </section>
+        {pendingOrders.length > 0 && 
+          <section>
+            <div className="mx-auto max-w-7xl pt-4 text-center">
+              <h1 
+                className="text-3xl font-bold tracking-tight text-gray-900"
+              >
+                Your Pending Orders
+              </h1>
+            </div>
+              <OrdersList
+                activeOrders={animals} 
+                userOrders={pendingOrders}
+              />
+          </section>
+        }
     </div>
   )
 }

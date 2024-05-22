@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function InfoCards() {
+export default function InfoCards({userOrders, pendingOrders}) {
     return (
         <div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
@@ -17,22 +17,30 @@ export default function InfoCards() {
                     </div>
                     <div className="px-4 text-gray-700">
                         <h3 className="text-sm tracking-wider">Total Orders</h3>
-                        <p className="text-3xl">567</p>
+                        <p className="text-3xl">
+                            {userOrders.length}
+                        </p>
                     </div>
                 </div>
-                <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
-                    <div className="p-4 bg-blue-400"><svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2">
-                            </path>
-                        </svg></div>
-                    <div className="px-4 text-gray-700">
-                        <h3 className="text-sm tracking-wider">Pending Orders</h3>
-                        <p className="text-3xl">265</p>
+                {pendingOrders && 
+                    <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+                        <div className="p-4 bg-blue-400"><svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2">
+                                </path>
+                            </svg>
+                        </div>
+                        <div className="px-4 text-gray-700">
+                            <h3 className="text-sm tracking-wider">Pending Orders</h3>
+                            <p className="text-3xl">
+                                {pendingOrders.length}
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+                }
+                
+                {/* <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
                     <div className="p-4 bg-indigo-400"><svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -43,7 +51,7 @@ export default function InfoCards() {
                         <h3 className="text-sm tracking-wider">Listed Animals</h3>
                         <p className="text-3xl">34</p>
                     </div>
-                </div>
+                </div> */}
                 {/* <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
                     <div className="p-4 bg-red-400">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none"

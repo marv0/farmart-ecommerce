@@ -8,6 +8,9 @@ export default function FarmerRegister() {
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
+    const [farmName, setFarmName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [address, setAddress] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -28,6 +31,15 @@ export default function FarmerRegister() {
         } else if(!confirmPassword){
             toast.error('Please confirm your password')
             return
+        } else if(!farmName){
+            toast.error('Farm Name required')
+            return
+        } else if(!phoneNumber){
+            toast.error('Phone Number required')
+            return
+        } else if(!address){
+            toast.error('Please enter your address')
+            return
         } else if(password !== confirmPassword){
             toast.error('Your passwords do not match')
             return
@@ -35,6 +47,9 @@ export default function FarmerRegister() {
             const formData = {
                 username:username,
                 email:email,
+                farm_name:farmName,
+                address: address,
+                phone_number: phoneNumber,
                 password:password,
                 user_type:user_type
             }
@@ -193,6 +208,77 @@ export default function FarmerRegister() {
                                                 border-2 border-gray-200 outline-none 
                                                 focus:border-indigo-500" 
                                                 placeholder="johnsmith@example.com"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-2">
+                                        <label 
+                                            htmlFor="farmName" 
+                                            className="text-xs font-semibold px-1"
+                                        >
+                                            Farm Name
+                                        </label>
+                                        <div className="flex">
+                                            <input 
+                                                type="text"
+                                                id='farmName' 
+                                                value={farmName}
+                                                onChange={(e) => setFarmName(e.target.value)}
+                                                className="w-full pl-4 pr-3 py-2 rounded-lg 
+                                                border-2 border-gray-200 outline-none 
+                                                focus:border-indigo-500" 
+                                                placeholder="Name of Your Farm"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-2">
+                                        <label 
+                                            htmlFor="phoneNumber" 
+                                            className="text-xs font-semibold px-1"
+                                        >
+                                            Phone Number
+                                        </label>
+                                        <div className="flex">
+                                            <input 
+                                                type="tel"
+                                                id='phoneNumber' 
+                                                value={phoneNumber}
+                                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                                className="w-full pl-4 pr-3 py-2 rounded-lg 
+                                                border-2 border-gray-200 outline-none 
+                                                focus:border-indigo-500" 
+                                                placeholder="0722000000"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-2">
+                                        <label 
+                                            htmlFor="address" 
+                                            className="text-xs font-semibold px-1"
+                                        >
+                                            Address
+                                        </label>
+                                        <div className="flex">
+                                            <input 
+                                                type="text"
+                                                id='address' 
+                                                value={address}
+                                                onChange={(e) => setAddress(e.target.value)}
+                                                className="w-full pl-4 pr-3 py-2 rounded-lg 
+                                                border-2 border-gray-200 outline-none 
+                                                focus:border-indigo-500" 
+                                                placeholder="Your farm address"
+                                                required
                                             />
                                         </div>
                                     </div>

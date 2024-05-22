@@ -50,8 +50,9 @@ export default function FarmerEditAnimal() {
       const response = await fetch(`http://127.0.0.1:5555/update_animal/${wantedAnimal.id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+          // 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          mode:"no-cors",
         },
         body: jsonData
       });

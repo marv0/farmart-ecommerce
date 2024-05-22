@@ -9,7 +9,7 @@ export default function EditAnimal({animal, handleEditAnimalData, loading}) {
     const [animalPrice, setAnimalPrice] = useState(0)
     const [animalDescription, setAnimalDescription] = useState('')
     const [animalQuantity, setAnimalQuantity] = useState(1)
-    const [animalPhoto, setAnimalPhoto] = useState('')
+    const [animalPhoto, setAnimalPhoto] = useState(null)
 
     useEffect(()=>{
         if(animal){
@@ -19,26 +19,27 @@ export default function EditAnimal({animal, handleEditAnimalData, loading}) {
             setAnimalPrice(animal.price || 0);
             setAnimalDescription(animal.description || '');
             setAnimalQuantity(animal.quantity || 1);
-            // setAnimalPhoto(animal.photo || '');
+            setAnimalPhoto(animal.photo || null);
         }
     }, [animal])
+
+    const handleFileChange = (e) => {
+        setAnimalPhoto(e.target.files[0]);
+    };
 
     const handleFormSubmit = (event) => {
         event.preventDefault(); 
 
-        const formData = {
-            type: animalType,
-            breed: animalBreed,
-            age: animalAge,
-            price: animalPrice,
-            description: animalDescription,
-            quantity: animalQuantity,
-            photo: animalPhoto
-        }
+        const formData = new FormData();
+        formData.append('type', animalType);
+        formData.append('breed', animalBreed);
+        formData.append('age', animalAge);
+        formData.append('price', animalPrice);
+        formData.append('description', animalDescription);
+        formData.append('quantity', animalQuantity);
+        formData.append('image', animalPhoto);
 
-        const jsonData = JSON.stringify(formData);
-        // console.log("Submitted json Data for animal editing are:", jsonData)
-        handleEditAnimalData(jsonData)
+        handleEditAnimalData(formData)
     }
 
     return (
@@ -230,12 +231,12 @@ export default function EditAnimal({animal, handleEditAnimalData, loading}) {
                                 </label>
                                 <input 
                                     id="animalPhoto"
-                                    value={animalPhoto}
-                                    onChange={(e)=>setAnimalPhoto(e.target.value)}
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                     p-2.5 cursor-pointer" 
-                                    type="file"
                                 />
                                 <div 
                                     className="mt-1 text-sm text-gray-500 dark:text-gray-300" 

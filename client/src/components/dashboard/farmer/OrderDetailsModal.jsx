@@ -1,4 +1,9 @@
 import React from 'react'
+import { format } from 'date-fns';
+
+function formatDate(dateString) {
+  return format(new Date(dateString), 'MMMM dd, yyyy HH:mm:ss');
+}
 
 export default function OrderDetailsModal({orderData, orderDetailsModalOpen, setOrderDetailsModalOpen}) {
     return (
@@ -77,7 +82,7 @@ export default function OrderDetailsModal({orderData, orderDetailsModalOpen, set
                               Date Ordered: 
                           </span>
                           <span>
-                              {orderData.created_at}
+                              {formatDate(orderData.created_at)}
                           </span>
                         </p>
                       </div>

@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 function formatDate(dateString) {
     return format(new Date(dateString), 'MMMM dd, yyyy HH:mm:ss');
 }
-export default function OrdersList({userOrders, loading}) {
+export default function OrdersList({userOrders, loading, setPendingOrders}) {
     const [clickedItemIndex, setClickedItemIndex] = useState(null);
     const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
     const [cancelOrderModalOpen, setCancelOrderModalOpen] = useState(false)
@@ -70,6 +70,7 @@ export default function OrdersList({userOrders, loading}) {
             const responseData = await response.json();
             if(response.status === 200){
                 toast.success(responseData.message)
+                setPendingOrders(userOrders.filter(order => order.id !== order_id))
             }else{
                 toast.error(responseData.error)
             }
@@ -128,7 +129,7 @@ export default function OrdersList({userOrders, loading}) {
                                     {userOrder.quantity}
                                 </td>
                                 <td className="px-6 py-3 text-sm">
-                                    Ksh. {userOrder.totalPrice}
+                                    Ksh. {userOrder.total_price}
                                 </td>
                                 <td className="px-6 py-3 text-sm">
                                     {formatDate(userOrder.created_at)}
@@ -179,7 +180,7 @@ export default function OrdersList({userOrders, loading}) {
                                                     </button>
                                                 </li>
                                                 )}
-                                                {user && user === 'farmer' && userOrder.status === 'pending' && (
+                                                {/* {user && user === 'farmer' && userOrder.status === 'pending' && (
                                                 <li>
                                                     <button 
                                                         onClick={() => cancelOrder(userOrder)}
@@ -192,8 +193,8 @@ export default function OrdersList({userOrders, loading}) {
                                                         Cancel Order
                                                     </button>
                                                 </li>
-                                                )}
-                                                {user && user === 'farmer' && userOrder.status === 'active' && (
+                                                )} */}
+                                                {/* {user && user === 'farmer' && userOrder.status === 'active' && (
                                                 <li>
                                                     <button 
                                                         onClick={() => cancelOrder(userOrder)}
@@ -206,7 +207,7 @@ export default function OrdersList({userOrders, loading}) {
                                                         Complete Order
                                                     </button>
                                                 </li>
-                                                )}
+                                                )} */}
                                             </ul>
                                         </div>
                                     )}

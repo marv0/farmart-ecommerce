@@ -30,9 +30,9 @@ export default function Cart() {
             const purchasedAnimalId = cartItems[0].animal.id
             const quantity = cartItems[0].quantity
             const formData = {
-                purchasedAnimalId,
-                quantity,
-                userNumber
+                animal_id: purchasedAnimalId,
+                quantity: quantity,
+                phone_number: userNumber
             }
             const jsonData = JSON.stringify(formData);
             console.log('Are you ready to proceed with payment? The data you are submitting is: ', jsonData)
@@ -64,7 +64,7 @@ export default function Cart() {
     const handleCheckoutButtonClicked = () => {
         if(!user){
             const intendedUrl = location.pathname;
-            toast.error('Please login to view this page')
+            toast.error('Please login to proceed')
             navigate(`/auth/login?redirect=${intendedUrl}`);
         } else {
             setModalOpen(true)

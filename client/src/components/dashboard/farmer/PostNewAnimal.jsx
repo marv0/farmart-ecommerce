@@ -9,24 +9,25 @@ export default function PostNewAnimal({handleAnimalData, loading}) {
     const [animalPrice, setAnimalPrice] = useState(1)
     const [animalDescription, setAnimalDescription] = useState('')
     const [animalQuantity, setAnimalQuantity] = useState(1)
-    const [animalPhoto, setAnimalPhoto] = useState('')
+    const [animalPhoto, setAnimalPhoto] = useState(null)
 
-    const handleFormSubmit = (event) => {
+    const handleFileChange = (e) => {
+        setAnimalPhoto(e.target.files[0]);
+    };
+
+    const handleFormSubmit = async(event) => {
         event.preventDefault(); 
 
-        const formData = {
-            type: animalType,
-            breed: animalBreed,
-            age: Number(animalAge),
-            price: Number(animalPrice),
-            description: animalDescription,
-            quantity: Number(animalQuantity),
-            // photo: animalPhoto
-        }
+        const formData = new FormData();
+        formData.append('type', animalType);
+        formData.append('breed', animalBreed);
+        formData.append('age', animalAge);
+        formData.append('price', animalPrice);
+        formData.append('description', animalDescription);
+        formData.append('quantity', animalQuantity);
+        formData.append('image', animalPhoto);
 
-        const jsonData = JSON.stringify(formData);
-        console.log("Submitted json Data for animal posting are:", jsonData)
-        handleAnimalData(jsonData)
+        await handleAnimalData(formData)
     }
   return (
     <div>
@@ -217,12 +218,12 @@ export default function PostNewAnimal({handleAnimalData, loading}) {
                             </label>
                             <input 
                                 id="animalPhoto"
-                                value={animalPhoto}
-                                onChange={(e)=>setAnimalPhoto(e.target.value)}
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
                                 p-2.5 cursor-pointer" 
-                                type="file"
                             />
                             <div 
                                 className="mt-1 text-sm text-gray-500 dark:text-gray-300" 

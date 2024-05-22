@@ -24,7 +24,7 @@ export default function FarmerAnimalsList() {
           });
           const data = await response.json();
           if(response.status === 200){
-            setCurrentFarmerAnimals(data.animals)
+            setCurrentFarmerAnimals(data)
             setLoading(false)
           }else{
             toast.error('Unauthorized access')

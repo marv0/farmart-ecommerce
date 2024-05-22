@@ -68,7 +68,7 @@ def register():
         address = None
         phone_number = None
 
-    hashed_password = generate_password_hash(password, method='sha256')
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
     new_user = User(
         username=username, 
         email=email, 
@@ -143,6 +143,17 @@ def list_animals():
 
     return jsonify(animal_data)
 
+# Route to get animal details 
+@app.route('/animal/<int:animal_id>', methods=['GET'])
+def get_animal(animal_id):
+    animal = Animal.query.get_or_404(animal_id)
+    if animal:
+        # animal_data = animal.to_dict()
+        # Serialize animals data
+        animal_data = {'id': animal.id, 'type': animal.type, 'breed': animal.breed,
+                    'age': animal.age, 'price': animal.price, 'description': animal.description, 'quantity': animal.quantity}
+        return jsonify(animal_data), 200
+
 # Define route for adding a new animal (for farmers)
 @app.route('/add_animal', methods=['POST'])
 @jwt_required()
@@ -153,12 +164,16 @@ def add_animal():
 
     data = request.form
     type = data.get('type')
+
+    print('Animal type is:', type)
+
     breed = data.get('breed')
     age = data.get('age')
     price = data.get('price')
     description = data.get('description')
     quantity = data.get('quantity')
-    # image = data.get('image_filename')
+
+    print('Submitted data is: ', data)
 
     if 'image' not in request.files:
         return jsonify({'error': 'Image file is required.'}), 400
@@ -184,6 +199,30 @@ def add_animal():
     db.session.commit()
 
     return jsonify({'message': 'Animal added successfully.'}), 201
+
+# Route to get all animals belonging to a specific farmer 
+@app.route('/get_farmer_animals', methods=['GET'])
+@jwt_required()
+def get_farmer_animals():
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'farmer':
+        return jsonify({'error': 'You do not have permission to access this page.'}), 401
+    
+    # Get the farmer associated with the current user
+    user = User.query.filter_by(id=current_user['id']).first()
+    print('Farmer Fetched', user)
+    if not user:
+        print('Farmer with this id not found', current_user['id'])
+        return jsonify({'error': 'Farmer not found.'}), 404
+    
+    # Get all animals associated with the farmer
+    animals = Animal.query.filter_by(farmer_id=user.id).all()
+
+    # Serialize the animal data
+    animal_data = [{'id': animal.id, 'type': animal.type, 'breed': animal.breed,
+                    'age': animal.age, 'price': animal.price, 'description': animal.description, 'quantity': animal.quantity}
+                   for animal in animals]
+    return jsonify(animal_data), 200
 
 # Define route for updating an animal (for farmers)
 @app.route('/update_animal/<int:animal_id>', methods=['PUT'])
@@ -270,17 +309,47 @@ def view_farmer_orders():
 
     farmer_orders = Order.query.join(Animal).filter(Animal.farmer_id == current_user['id']).all()
 
-    order_data = []
-    for order in farmer_orders:
-        order_info = order.to_dict()
-        order_info['animal'] = order.animal.to_dict()
-        order_info['buyer'] = {k: v for k, v in order.buyer.to_dict().items() if k != 'password'}  # Exclude password
-        order_data.append(order_info)
+    order_data = [{
+            'id': order.id,
+            'animal_type': order.animal.type,
+            'animal_breed': order.animal.breed,
+            'age': order.animal.age,
+            'price': order.animal.price,
+            'description': order.animal.description,
+            'quantity': order.quantity,
+            'total_price': order.total_price,
+            'status': order.status,
+            'image_filename': order.animal.image_filename,
+            'created_at': order.created_at,
+            'updated_at': order.animal.updated_at,
+        } for order in farmer_orders]
+    # order_data = []
+    # for order in farmer_orders:
+    #     order_info = order.to_dict()
+    #     order_info['animal'] = order.animal.to_dict()
+    #     order_info['buyer'] = order.buyer.to_dict()
+    #     order_data.append(order_info)
 
     return jsonify(order_data), 200
 
-
 # Define route for viewing orders ( for consumer)
+# @app.route('/consumer_orders', methods=['GET'])
+# @jwt_required()
+# def view_consumer_orders():
+#     current_user = get_jwt_identity()
+#     if current_user['user_type'] != 'consumer':
+#         return jsonify({'error': 'You do not have permission to access this page.'}), 403
+
+#     consumer_orders = Order.query.filter_by(buyer_id=current_user['id']).all()
+#     order_data = []
+#     for order in consumer_orders:
+#         order_info = order.to_dict()
+#         order_info['animal'] = order.animal.to_dict()
+#         order_info['farmer'] = order.animal.farmer.to_dict()
+#         order_data.append(order_info)
+
+#     return jsonify(order_data), 200
+
 @app.route('/consumer_orders', methods=['GET'])
 @jwt_required()
 def view_consumer_orders():
@@ -289,17 +358,23 @@ def view_consumer_orders():
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     consumer_orders = Order.query.filter_by(buyer_id=current_user['id']).all()
-
-    # Serialize orders manually to handle nested relationships
-    order_data = []
-    for order in consumer_orders:
-        order_info = order.to_dict()
-        order_info['animal'] = order.animal.to_dict()
-        order_info['farmer'] = {k: v for k, v in order.animal.farmer.to_dict().items() if k != 'password'}  # Exclude password
-        order_data.append(order_info)
+    
+    order_data = [{
+            'id': order.id,
+            'animal_type': order.animal.type,
+            'animal_breed': order.animal.breed,
+            'age': order.animal.age,
+            'price': order.animal.price,
+            'description': order.animal.description,
+            'quantity': order.quantity,
+            'total_price': order.total_price,
+            'status': order.status,
+            'image_filename': order.animal.image_filename,
+            'created_at': order.created_at,
+            'updated_at': order.animal.updated_at,
+        } for order in consumer_orders]
 
     return jsonify(order_data), 200
-
 
 # Define route for accepting an order (for farmers)
 @app.route('/accept_order/<int:order_id>', methods=['PUT'])

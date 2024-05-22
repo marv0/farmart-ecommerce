@@ -158,6 +158,7 @@ def add_animal():
     price = data.get('price')
     description = data.get('description')
     quantity = data.get('quantity')
+    # image = data.get('image_filename')
 
     if 'image' not in request.files:
         return jsonify({'error': 'Image file is required.'}), 400
@@ -268,14 +269,16 @@ def view_farmer_orders():
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     farmer_orders = Order.query.join(Animal).filter(Animal.farmer_id == current_user['id']).all()
+
     order_data = []
     for order in farmer_orders:
         order_info = order.to_dict()
         order_info['animal'] = order.animal.to_dict()
-        order_info['buyer'] = order.buyer.to_dict()
+        order_info['buyer'] = {k: v for k, v in order.buyer.to_dict().items() if k != 'password'}  # Exclude password
         order_data.append(order_info)
 
     return jsonify(order_data), 200
+
 
 # Define route for viewing orders ( for consumer)
 @app.route('/consumer_orders', methods=['GET'])
@@ -286,14 +289,17 @@ def view_consumer_orders():
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
     consumer_orders = Order.query.filter_by(buyer_id=current_user['id']).all()
+
+    # Serialize orders manually to handle nested relationships
     order_data = []
     for order in consumer_orders:
         order_info = order.to_dict()
         order_info['animal'] = order.animal.to_dict()
-        order_info['farmer'] = order.animal.farmer.to_dict()
+        order_info['farmer'] = {k: v for k, v in order.animal.farmer.to_dict().items() if k != 'password'}  # Exclude password
         order_data.append(order_info)
 
     return jsonify(order_data), 200
+
 
 # Define route for accepting an order (for farmers)
 @app.route('/accept_order/<int:order_id>', methods=['PUT'])

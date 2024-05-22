@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -6,20 +7,24 @@ from flask import request, jsonify, flash, redirect, url_for
 from sqlalchemy import or_
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from datetime import timedelta
+from werkzeug.utils import secure_filename
 
 # Import Flask app and SQLAlchemy instance from config
 from config import app, db  
 
 # Add your model imports
-from models import User, Farmer, Animal, Order, db
+from models import User, Animal, Order, db
 
-# # Initialize LoginManager
-# login_manager = LoginManager()
-# login_manager.login_view = 'login'  # Specify the login route
-# login_manager.init_app(app)
+# Configure upload folder and allowed extensions
+UPLOAD_FOLDER = 'uploads/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Initialize extensions
-# db = SQLAlchemy(app)
+# Create the upload folder if it does not exist
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+#Initialize JWT _ flask Extension 
 jwt = JWTManager(app)
 
 # Initialize LoginManager
@@ -32,6 +37,9 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 # Define route for user registration
 @app.route('/register', methods=['POST'])
 def register():
@@ -39,16 +47,37 @@ def register():
     username = data.get('username')
     email = data.get('email')
     password = data.get('password')
-    user_type = data.get('user_type')  # 'consumer' or 'farmer'
+    user_type = data.get('user_type')
+    
+    if not username or not email or not password or not user_type:
+        return jsonify({'error': 'Username, email, password, and user type are required.'}), 400
 
-    # Check if user already exists
     existing_user = User.query.filter_by(username=username).first()
     if existing_user:
         return jsonify({'error': 'Username already exists. Please choose a different one.'}), 400
 
-    # Create new user
+    # Conditionally require farm-related fields for farmers
+    if user_type == 'farmer':
+        farm_name = data.get('farm_name')
+        address = data.get('address')
+        phone_number = data.get('phone_number')
+        if not farm_name or not address or not phone_number:
+            return jsonify({'error': 'Farm name, address, and phone number are required for farmers.'}), 400
+    else:
+        farm_name = None
+        address = None
+        phone_number = None
+
     hashed_password = generate_password_hash(password, method='sha256')
-    new_user = User(username=username, email=email, password=hashed_password, user_type=user_type)
+    new_user = User(
+        username=username, 
+        email=email, 
+        password=hashed_password, 
+        user_type=user_type,
+        farm_name=farm_name,
+        address=address,
+        phone_number=phone_number
+    )
     db.session.add(new_user)
     db.session.commit()
 
@@ -122,7 +151,7 @@ def add_animal():
     if current_user['user_type'] != 'farmer':
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
-    data = request.get_json()
+    data = request.form
     type = data.get('type')
     breed = data.get('breed')
     age = data.get('age')
@@ -130,7 +159,26 @@ def add_animal():
     description = data.get('description')
     quantity = data.get('quantity')
 
-    new_animal = Animal(farmer_id=current_user['id'], type=type, breed=breed, age=age, price=price, description=description, quantity=quantity)
+    if 'image' not in request.files:
+        return jsonify({'error': 'Image file is required.'}), 400
+    
+    image = request.files['image']
+    if image.filename == '' or not allowed_file(image.filename):
+        return jsonify({'error': 'Invalid image file.'}), 400
+    
+    filename = secure_filename(image.filename)
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+    new_animal = Animal(
+        farmer_id=current_user['id'], 
+        type=type, 
+        breed=breed, 
+        age=age, 
+        price=price, 
+        description=description, 
+        quantity=quantity,
+        image_filename=filename
+    )
     db.session.add(new_animal)
     db.session.commit()
 
@@ -145,13 +193,20 @@ def update_animal(animal_id):
     if current_user['user_type'] != 'farmer' or animal.farmer_id != current_user['id']:
         return jsonify({'error': 'You do not have permission to access this page.'}), 403
 
-    data = request.get_json()
+    data = request.form
     animal.type = data.get('type')
     animal.breed = data.get('breed')
     animal.age = data.get('age')
     animal.price = data.get('price')
     animal.description = data.get('description')
     animal.quantity = data.get('quantity')
+
+    if 'image' in request.files:
+        image = request.files['image']
+        if image.filename != '' and allowed_file(image.filename):
+            filename = secure_filename(image.filename)
+            image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            animal.image_filename = filename
 
     db.session.commit()
     return jsonify({'message': 'Animal updated successfully.'}), 200
@@ -181,6 +236,10 @@ def place_order(animal_id):
     data = request.get_json()
     quantity = int(data.get('quantity'))
     total_price = quantity * animal.price
+    phone_number = data.get('phone_number')
+
+    if len(phone_number) != 10:
+        return jsonify({'error': 'Phone number must be 10 digits long.'}), 400
 
     if quantity <= 0:
         return jsonify({'error': 'Quantity must be greater than zero.'}), 400
@@ -188,11 +247,53 @@ def place_order(animal_id):
     if quantity > animal.quantity:
         return jsonify({'error': 'Insufficient stock.'}), 400
 
-    new_order = Order(buyer_id=current_user['id'], animal_id=animal.id, quantity=quantity, total_price=total_price)
+    new_order = Order(
+        buyer_id=current_user['id'], 
+        animal_id=animal.id, 
+        quantity=quantity, 
+        total_price=total_price, 
+        phone_number=phone_number
+    )
     db.session.add(new_order)
     db.session.commit()
 
     return jsonify({'message': 'Order placed successfully.'}), 201
+
+# Define route for viewing orders ( for farmer)
+@app.route('/farmer_orders', methods=['GET'])
+@jwt_required()
+def view_farmer_orders():
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'farmer':
+        return jsonify({'error': 'You do not have permission to access this page.'}), 403
+
+    farmer_orders = Order.query.join(Animal).filter(Animal.farmer_id == current_user['id']).all()
+    order_data = []
+    for order in farmer_orders:
+        order_info = order.to_dict()
+        order_info['animal'] = order.animal.to_dict()
+        order_info['buyer'] = order.buyer.to_dict()
+        order_data.append(order_info)
+
+    return jsonify(order_data), 200
+
+# Define route for viewing orders ( for consumer)
+@app.route('/consumer_orders', methods=['GET'])
+@jwt_required()
+def view_consumer_orders():
+    current_user = get_jwt_identity()
+    if current_user['user_type'] != 'consumer':
+        return jsonify({'error': 'You do not have permission to access this page.'}), 403
+
+    consumer_orders = Order.query.filter_by(buyer_id=current_user['id']).all()
+    order_data = []
+    for order in consumer_orders:
+        order_info = order.to_dict()
+        order_info['animal'] = order.animal.to_dict()
+        order_info['farmer'] = order.animal.farmer.to_dict()
+        order_data.append(order_info)
+
+    return jsonify(order_data), 200
 
 # Define route for accepting an order (for farmers)
 @app.route('/accept_order/<int:order_id>', methods=['PUT'])

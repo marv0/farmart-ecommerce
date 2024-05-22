@@ -1,12 +1,12 @@
 import { useState } from "react";
 // import "./index.css";
 // import Axios from "axios";
-import Payment from "./Payment";
+// import Payment from "./Payment";
 
 function App() {
   return (
     <div>
-      < Payment/>
+      {/* < Payment/> */}
     </div>
   )
   // const [phone, setPhone] = useState();

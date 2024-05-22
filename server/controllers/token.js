@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+const orders = []; // In-memory storage for orders
+
 const createToken = async (req, res, next) => {
     const secret = "KAAhnaTOTISXIElr3lYK0WKLLCLaReLE83np2bYbG2SbKi1LbfHHow67NZSkqYxf";
     const consumer = "yMt1iSBAcWxBuI9PwBDkaAJ5XaZYjFgtHIr2ByHRV21RhI1m";
@@ -18,10 +20,37 @@ const createToken = async (req, res, next) => {
     }
 };
 
+const createOrder = (req, res) => {
+    const order = {
+        id: orders.length + 1,
+        phone: req.body.phone,
+        amount: req.body.amount,
+        status: 'pending'
+    };
+    orders.push(order);
+    res.status(201).json(order);
+};
+
+const acceptOrder = async (req, res, next) => {
+    const orderId = parseInt(req.params.id);
+    const order = orders.find(o => o.id === orderId);
+
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+
+    if (order.status !== 'pending') {
+        return res.status(400).json({ error: 'Order is not in a pending state' });
+    }
+
+    order.status = 'accepted';
+    req.order = order; // Pass order data to the next middleware
+    next();
+};
+
 const stkPush = async (req, res) => {
+    const { phone, amount } = req.order;
     const shortCode = 174379;
-    const phone = req.body.phone.substring(1);
-    const amount = req.body.amount;
     const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
 
@@ -40,9 +69,9 @@ const stkPush = async (req, res) => {
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
         Amount: amount,
-        PartyA: `254${phone}`,
+        PartyA: `254${phone.substring(1)}`,
         PartyB: shortCode,
-        PhoneNumber: `254${phone}`,
+        PhoneNumber: `254${phone.substring(1)}`,
         CallBackURL: "https://mydomain.com/path",
         AccountReference: "Mpesa Test",
         TransactionDesc: "Testing stk push",
@@ -54,9 +83,10 @@ const stkPush = async (req, res) => {
         });
         res.status(200).json(response.data);
     } catch (err) {
-        console.log(err);
-        res.status(400).json({ error: err.message });
-    }
+      console.log(err);
+      res.status(400).json({ error: err.message });
+  }
 };
 
-module.exports = { createToken, stkPush };
+module.exports = { createToken, createOrder, acceptOrder, stkPush };
+

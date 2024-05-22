@@ -1,7 +1,188 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+*{
+  margin: 0;
 }
 
+.card {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  width: 190px;
+  height: 254px;
+  background: #F4F6FB;
+  border: 1px solid white;
+  box-shadow: 10px 10px 64px 0px rgba(180, 180, 207, 0.75);
+  -webkit-box-shadow: 10px 10px 64px 0px rgba(186, 186, 202, 0.75);
+  -moz-box-shadow: 10px 10px 64px 0px rgba(208, 208, 231, 0.75);
+}
+
+.form {
+  padding: 25px;
+}
+
+.card_header {
+  display: flex;
+  align-items: center;
+}
+
+.card svg {
+  color: #7878bd;
+  margin-bottom: 20px;
+  margin-right: 5px;
+}
+
+.form_heading {
+  padding-bottom: 20px;
+  font-size: 21px;
+  color: #7878bd;
+}
+
+.field {
+  padding-bottom: 10px;
+}
+
+.input {
+  border-radius: 5px;
+  background-color: #e9e9f7;
+  padding: 5px;
+  width: 100%;
+  /* color: #7a7ab3; */
+  border: 1px solid #dadaf7;
+  margin-top: 4px;
+}
+
+.input:focus-visible {
+  outline: 1px solid #aeaed6;
+}
+
+.input::placeholder {
+  color: #bcbcdf;
+  text-align: center;
+}
+
+label {
+  color: #B2BAC8;
+  font-size: 14px;
+  display: block;
+  padding-bottom: 4px;
+}
+
+button {
+  background-color: hsl(240, 34%, 61%);
+  margin-top: 30px;
+  font-size: 14px;
+  padding: 7px 12px;
+  height: auto;
+  font-weight: 500;
+  color: white;
+  border: none;
+  margin-left: 25px;
+}
+
+button:hover {
+  background-color: #5f5f9c;
+}
+@keyframes bgTransition {
+  0%, 100% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+  }
+  33% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+  }
+  66% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+  }
+}
+
+.background-transition {
+  animation: bgTransition 15s infinite;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-transition::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slide 15s infinite;
+  z-index: -1;
+}
+
+@keyframes slide {
+  0% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+    opacity: 1;
+  }
+  33% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+    opacity: 0;
+  }
+  66% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+    opacity: 0;
+  }
+  100% {
+    background-image: url('/home/victor/mp/farmart-ecommerce/client/images/learning.jpg');
+    opacity: 1;
+  }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+.button {
+  background: #38a169;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: #2f855a;
+}
+.pay{
+  background-color: #2f855a;
+  font-family: sans-serif;
+  border-radius: 7px;
+  text-align: center;
+}

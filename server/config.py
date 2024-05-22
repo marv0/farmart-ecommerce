@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
+from datetime import timedelta
 
 # Local imports
 
@@ -16,6 +17,8 @@ app.config['SECRET_KEY'] = 'absnbsyfz633'  # Add your secret key here
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Change this to a random secret key
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 
 # Define metadata, instantiate db
 metadata = MetaData(naming_convention={

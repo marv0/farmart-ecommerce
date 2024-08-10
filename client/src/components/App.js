@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+// App.js
 
-function App() {
-  return <h1>Project Client</h1>;
-}
+import React from 'react';
+import Login from './Login';
+import Signup from './Signup';
+
+const App = () => {
+    return (
+        <div>
+            <Login />
+            <Signup />
+        </div>
+    );
+};
 
 export default App;
